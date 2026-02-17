@@ -1,0 +1,145 @@
+.auth-form-container {
+    --dark-blue: #00023d;
+    --formbackground: #f8f8f8;
+    --label-color: #3b3b3b;
+    --border-color: rgb(207, 207, 207);
+    --icon-color: #e01b1b;
+    --orange-color : #db6f00;
+}
+
+.auth-form-context {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: #f8f8f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.auth-form-container,
+form label {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.auth-form-container {
+    align-items: center;
+    width: 600px;
+    padding-bottom: 15px;
+    background-color: white;
+    border-radius: 35px;
+    border: solid 2px rgb(231, 231, 231);
+    box-shadow: 1px 1px 7px rgb(48, 48, 48);
+}
+
+form label {
+    margin-bottom: 11px;
+    letter-spacing: 1px;
+    font-size: 12px;
+    gap: 3px;
+    color: var(--label-color, "black");
+}
+
+form label {
+    position: relative;
+}
+
+form label input {
+
+    border-radius: 5px;
+    padding: 4px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 400px;
+    border: solid var(--border-color, "gray") 1px;
+    transition: all ease 0.3s;
+}
+
+form h1 {
+    text-align: center;
+    letter-spacing: 2px;
+    color: var(--dark-blue);
+}
+
+form span {
+    display: flex;
+    align-items: center;
+
+}
+
+/*postal code loading*/
+form .postalcode-loading {
+    position: absolute;
+    top: 24px;
+    background-color: white;
+
+    font-weight: bold;
+    left: 20px;
+    letter-spacing: 1.1px;
+    color: #db6f00;
+    font-size: 10px;
+    padding: 0px;
+    margin: -8px;
+
+}
+
+.form-icon {
+    margin-right: 5px;
+    color: var(--icon-color, "gray"),
+
+}
+
+/*Input place holders*/
+::-webkit-input-placeholder {
+    position: relative;
+    left: 10px;
+    font-size: 14px;
+    letter-spacing: 1px;
+
+}
+
+form button {
+    background-color: var(--dark-blue);
+    border: none;
+    width: 140px;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    transition: all ease 0.3s;
+
+}
+
+.option-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: nowrap;
+}
+
+.option-row select {
+    color: var(--label-color, "black");
+    border-radius: 5px;
+    padding: 5px;
+    width: 170px;
+    margin: 5px;
+    border-color: var(--border-color, "gray");
+    transition: all ease 0.2s;
+}
+form button:hover{
+    width: 150px;
+}
+form button:active{
+    background-color: var(--orange-color,"orange");
+}
+.option-row select:focus,
+form input:focus  {
+    border-color: var(--border-color, "gray");
+    padding-left: 10px;
+    padding-right: 20px;
+    box-shadow: 1px 1px 3px black;
+    outline: none;
+
+}
