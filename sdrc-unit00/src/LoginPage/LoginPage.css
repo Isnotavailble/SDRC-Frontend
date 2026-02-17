@@ -1,0 +1,16 @@
+.spinner-animation-icon {
+    animation: spin 1s linear infinite;
+}
+.login-form-container {
+    height: auto;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

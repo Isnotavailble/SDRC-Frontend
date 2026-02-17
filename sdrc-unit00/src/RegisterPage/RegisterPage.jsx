@@ -1,21 +1,24 @@
-import { useState } from "react";
-import { useAuthContext } from "../AuthContext/AuthContextProvider";
+import { useEffect, useState } from "react";
 import "./RegisterPage.css";
-import { User, Phone, UserStar, MapPinned, UserKey, UserLock } from "lucide-react";
+import { User, Phone, UserStar, MapPinned, UserKey, UserLock, Loader } from "lucide-react";
 import { Link } from "react-router-dom";
 import { formHandler, postalHandler } from "./HandlerProvider";
-
+import { useNavigate } from "react-router-dom";
 
 function RegisterPage() {
 
     const [postalCodes, setPostalCodes] = useState(null);
     const [loading, setLoading] = useState(null);
-    const [error,setError] = useState(null);
-
+    const [error, setError] = useState(null);
+    const [alreadyLoggedIn, setAlreadyLoggedIn] = useState(false);
+    const navigate = useNavigate();
+    useEffect(() => {
+        setAlreadyLoggedIn(localStorage.getItem("is_login") === "true" ? true : false);
+    }, []);
     return (
         <>
             <div className="auth-form-context">
-                <form method="POST" className="auth-form-container" onSubmit={(e) => {formHandler(e,{setError}); }}>
+                <form method="POST" className="auth-form-container" onSubmit={(e) => { formHandler(e, { setError, setLoading,navigate }); }}>
                     <h1>Register</h1>
                     <p style={{ marginTop: "-10px", color: "gray" }}>Create an account to be part of this platform</p>
                     <label>
@@ -47,16 +50,27 @@ function RegisterPage() {
                     </div>
                     <label>
                         <span> <UserKey className="form-icon" /> Password : </span>
-                        <input name="password" autoComplete="new-password" type="password" required minLength={8} placeholder="Enter password" />
+                        <input name="password" autoComplete="off" type="password" required minLength={8} placeholder="Enter password" />
                     </label>
                     <label>
                         <span><UserLock className="form-icon" />Type your password again:</span>
-                        {error === "password not match" && <p className="postalcode-loading">{error}</p> }
-                        <input name="confirm_password" autoComplete="new-password" type="password" required minLength={8} placeholder="Enter confirm password" />
+                        {error === "password not match" && <p className="postalcode-loading">{error}</p>}
+                        <input name="confirm_password" autoComplete="off" type="password" required minLength={8} placeholder="Enter confirm password" />
                     </label>
-                    <button type="submit">Register</button>
+
+                    {loading === "register loading" ?
+
+                        <Loader className="form-icon spinner-animation-icon" /> : alreadyLoggedIn === true ?
+
+                            <div style={{ display: "flex", flexDirection: "row", gap: "5px", marginTop: "10px" }}>
+                                <button type={"submit"}>Login</button>
+                                <button className="back-button" onClick={() => { navigate("/responder/centre"); }}>Back To Centre</button>
+                            </div> :
+
+                            <button type="submit">Register</button>}
+
                     <p style={{ color: "grey" }}> Already created an account ? </p>
-                    <Link style={{ marginTop: "-10px" }} to={"/login"}>Login</Link>
+                    <Link style={{ marginTop: "-10px" }} to={"/login"} replace>Login</Link>
                 </form>
 
             </div>

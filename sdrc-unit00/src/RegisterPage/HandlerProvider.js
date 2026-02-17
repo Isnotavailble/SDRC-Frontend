@@ -1,5 +1,5 @@
 import { fetchPotstalCodes } from "../Util/fetchPostalCode";
-export function formHandler(e , {setError}) {
+export async function formHandler(e , {setError,setLoading,navigate}) {
     e.preventDefault();
     const form = new FormData(e.target);
     const data = Object.fromEntries(form.entries());
@@ -9,8 +9,15 @@ export function formHandler(e , {setError}) {
         setError("password not match");
         return;
     }
+    setLoading("register loading");
+    await new Promise(r => setTimeout(r,2000));
     console.log("form registered");
     setError(null);
+    setLoading(null);
+    localStorage.setItem("is_login" , "true");
+    localStorage.setItem("user_phone",data["phonenumber"]);
+    navigate("/responder/centre");
+    
 }
 //simulated fetch
 export async function postalHandler({ postalCodes, setPostalCodes, loading, setLoading }) {

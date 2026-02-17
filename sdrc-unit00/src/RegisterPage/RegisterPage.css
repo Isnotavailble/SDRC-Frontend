@@ -4,7 +4,7 @@
     --label-color: #3b3b3b;
     --border-color: rgb(207, 207, 207);
     --icon-color: #e01b1b;
-    --orange-color : #db6f00;
+    --orange-color: #db6f00;
 }
 
 .auth-form-context {
@@ -28,7 +28,7 @@ form label {
 
 .auth-form-container {
     align-items: center;
-    width: 600px;
+    width: 550px;
     padding-bottom: 15px;
     background-color: white;
     border-radius: 35px;
@@ -128,14 +128,17 @@ form button {
     border-color: var(--border-color, "gray");
     transition: all ease 0.2s;
 }
-form button:hover{
+
+form button:hover {
     width: 150px;
 }
-form button:active{
-    background-color: var(--orange-color,"orange");
+
+form button:active {
+    background-color: var(--orange-color, "orange");
 }
+
 .option-row select:focus,
-form input:focus  {
+form input:focus {
     border-color: var(--border-color, "gray");
     padding-left: 10px;
     padding-right: 20px;
