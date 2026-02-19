@@ -28,7 +28,7 @@ function App() {
             <ResponderMainLayout /> : <Navigate to={"/login"} />}
           path='responder'>
 
-          <Route path='centre' element={<ResponderMainPage />} />
+          <Route path='home' element={<ResponderMainPage />} />
 
         </Route>
 

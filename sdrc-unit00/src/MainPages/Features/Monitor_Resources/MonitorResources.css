@@ -1,0 +1,37 @@
+.monitor-resource-container {
+    margin-left: 30px;
+
+}
+
+.monitor-resource-container h1 {
+    color: var(--dark-blue, "blue");
+    letter-spacing: 1.5px;
+    margin-bottom: -2px;
+
+}
+
+.monitor-resource-container .line {
+    width: 110px;
+    height: 5px;
+    background-color: rgb(182, 182, 182);
+    margin-bottom: 30px;
+    border-radius: 10px;
+
+}
+
+.add-button {
+    border-radius: 10px;
+    border: none;
+    background-color: white;
+    color: gray;
+    margin-top: 20px;
+    height: 40px;
+    width: 130px;
+    box-shadow: 0px 0px 5px var(--card-shadow);
+    transition: ease all 0.3s;
+}
+
+.add-button:hover {
+    background-color: rgb(240, 239, 239);
+    box-shadow: 0px 0px 10px var(--card-shadow, "gray");
+}

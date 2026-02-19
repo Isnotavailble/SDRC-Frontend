@@ -1,5 +1,22 @@
 /* src/index.css */
 /* 1. The Regular (Upright) Variable Font */
+
+
+:root {
+
+    --dark-blue: #00023d;
+    --formbackground: #f8f8f8;
+    --text-color : #f8f8f8;
+    --label-color: #3b3b3b;
+    --border-color: rgb(207, 207, 207);
+    --icon-color: #e01b1b;
+    --orange-color: #db6f00;
+    --header-team-icon-color : #f47c00;
+    --main-card-color : #ededed;
+    --light-gray : #e1e1e1;
+    --card-shadow : rgb(150, 139, 139);
+}
+
 @font-face {
     font-family: 'Roboto';
     src: url('./assets/Roboto/Roboto-VariableFont_wdth,wght.ttf') format('truetype-variations');
@@ -19,5 +36,7 @@
 
 /* 3. Apply it globally */
 body {
+    
     font-family: "Roboto";
+    
 }

@@ -5,13 +5,13 @@ function Header({ team }) {
         <div className="header-container">
             {/*left side menu,webname*/}
             <div className="header-left">
-                <Menu />
+                <Menu className="header-menu-icon"/>
                 <h1>Artificial Punks</h1>
             </div>
             {/*right side team name*/}
             <div className="header-right">
-                <HeartPulse />
-                <h1>{team || "Unknown"}</h1>
+                <HeartPulse className="header-team-icon"  strokeWidth={1.8} />
+                <h1>{team || "Teanname"}</h1>
             </div>
 
         </div>

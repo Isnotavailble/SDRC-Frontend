@@ -1,0 +1,58 @@
+.responder-main-page-container {
+    position: relative;
+    height: 500px;
+    padding: 20px;
+    margin: 50px;
+    margin-top: 120px;
+    background-color: #f8f8f8;
+    box-shadow: 0px 0px 5px rgb(150, 139, 139);
+    border-radius: 12px;
+}
+
+/*feature button row*/
+.responder-features-row {
+    position: relative;
+    left: 30px;
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+.responder-features-row button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 11px;
+
+    width: 60px;
+    height: 58px;
+    box-shadow: 0px 0px 3px var(--card-shadow);
+
+    border: solid var(--main-card-color) 1px;
+    color: var(--dark-blue, "blue");
+    background-color:rgb(231, 231, 233);
+    transition: ease all 0.3s;
+}
+.responder-features-row button:hover{
+    width : 70px;
+    box-shadow: 0px 0px 9px var(--card-shadow);
+}
+.responder-features-row button:active{
+    background-color: rgb(238, 238, 238);
+}
+
+.responder-features-row button p {
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.responder-main-page-icon {
+    position: relative;
+    top: 5px;
+    width:25px;
+    height: 25px;
+    color: var(--dark-blue);
+    stroke-width: 1.1px;
+
+}
