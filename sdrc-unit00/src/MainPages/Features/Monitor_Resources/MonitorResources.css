@@ -20,6 +20,7 @@
 }
 
 .add-button {
+    position: relative;
     border-radius: 10px;
     border: none;
     background-color: white;
@@ -29,9 +30,22 @@
     width: 130px;
     box-shadow: 0px 0px 5px var(--card-shadow);
     transition: ease all 0.3s;
+    
 }
 
 .add-button:hover {
     background-color: rgb(240, 239, 239);
     box-shadow: 0px 0px 10px var(--card-shadow, "gray");
+}
+
+.resouces-layout {
+
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+
 }

@@ -1,6 +1,6 @@
 .responder-main-page-container {
     position: relative;
-    height: 500px;
+    min-height: 500px;
     padding: 20px;
     margin: 50px;
     margin-top: 120px;

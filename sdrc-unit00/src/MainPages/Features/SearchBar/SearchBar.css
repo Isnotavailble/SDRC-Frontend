@@ -69,8 +69,11 @@
     overflow: hidden;
     left: -95px;
     background-color: var(--light-gray, "gray");
+    background-color: rgba(232, 232, 233, 0.822);
     border-radius: 10px;
+    
     transition: ease all 0.3s;
+    z-index: 101;
 }
 
 .filter-dropdown button {

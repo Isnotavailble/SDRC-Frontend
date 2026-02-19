@@ -21,12 +21,12 @@ export default function SearchBar({ filter_options }) {
             {/*search bar div*/}
             <div className="searchbar-box">
                 <Search className="searchbar-icon" strokeWidth={2} color="#807e7e" size={20} />
-                <input placeholder="search ..." type="text" />
+                <input placeholder="search resource by..." type="text" />
                 <button className="filter-button" onClick={() => { dropDownHandler("filter_drop", 120) }}>{selectedType || "Filter"}</button>
 
                 <div className="filter-drop-box">
                     <div className="filter-dropdown" ref={el => { if (el) drop.current["filter_drop"] = el }}>
-                        {filter_options.map((o, i) => <button key={i} onClick={() => {dropDownHandler("filter_drop",120);setSelectedType(o)}}>{o}</button>)}
+                        {filter_options.slice(1).map((o, i) => <button key={i} onClick={() => {dropDownHandler("filter_drop",120);setSelectedType(o)}}>{o}</button>)}
                     </div>
                 </div>
 
