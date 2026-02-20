@@ -5,6 +5,8 @@
     padding-left: 27px;
     padding-right: 27px;
     width: 437px;
+    min-height: 300px;
+    min-width: 436px;
     border-radius: 20px;
     box-shadow:0px 0px 5px var(--card-shadow,"gray");
 }

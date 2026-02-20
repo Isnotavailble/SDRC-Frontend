@@ -1,6 +1,6 @@
 import { Container, Hospital, HouseHeart } from "lucide-react";
 import "./ResourceCard.css";
-export default function ResourceCard({ name, location, status, info, type }) {
+export default function ResourceCard({ animationClassName, name, location, status, info, type }) {
     const color = () => {
         if (!status) return "";
         if (status.toLowerCase() === "available")
@@ -12,8 +12,8 @@ export default function ResourceCard({ name, location, status, info, type }) {
     const buttons = ["view", "update", "delete"];
 
     return (
-        <div className="resource-card-container">
-            <div className="resource-status" style={{ borderColor: color(), color: color() , boxShadow : "0px 0px 3px " + color() }} >{status}</div>
+        <div className={`resource-card-container`}>
+            <div className="resource-status" style={{ borderColor: color(), color: color(), boxShadow: "0px 0px 3px " + color() }} >{status}</div>
             <div className="resource-type-row">
                 {type === "hospital" && <Hospital className="resource-icon" />}
                 {type === "shelter" && <HouseHeart className="resource-icon" />}

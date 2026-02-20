@@ -1,0 +1,8 @@
+/* The only rule Leaflet actually requires to render */
+.basic-map-container {
+  max-height: var(--map-max-height);
+  width: 100%;
+  border-radius: 25px;
+  transition: ease all 0.8s;
+  box-shadow: 0px 0px 8px var(--card-shadow, "gray");
+}

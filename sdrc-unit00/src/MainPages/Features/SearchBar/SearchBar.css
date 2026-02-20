@@ -21,12 +21,9 @@
 
 }
 
-.searchbar-box input:hover {
-    width: 300px;
-}
-
 .searchbar-box input:focus {
     outline: none;
+    width: 290px;
     box-shadow: 0px 0px 5px var(--dark-blue, "blue");
 }
 
@@ -71,7 +68,7 @@
     background-color: var(--light-gray, "gray");
     background-color: rgba(232, 232, 233, 0.822);
     border-radius: 10px;
-    
+
     transition: ease all 0.3s;
     z-index: 101;
 }
