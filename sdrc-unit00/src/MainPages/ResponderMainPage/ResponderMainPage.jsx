@@ -32,7 +32,7 @@ export default function ResponderMainPage() {
             </div>
 
             {/* feature context */}
-            <div>
+            <div className="responder-feature-container">
                 {currentMode === features[0] && <MonitorResources/> }
             </div>
 

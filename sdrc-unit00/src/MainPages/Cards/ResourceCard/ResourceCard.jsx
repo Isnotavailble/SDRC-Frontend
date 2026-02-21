@@ -1,6 +1,21 @@
 import { Container, Hospital, HouseHeart } from "lucide-react";
 import "./ResourceCard.css";
-export default function ResourceCard({ animationClassName, name, location, status, info, type }) {
+/*
+expected json format
+{
+    type: "hospital",
+    name: "My TownShit",
+    status: "closed",
+    location: "yangon",
+    lat: 16.8053,
+    lon: 96.1561, // General Yangon coordinates
+    info: "This place is so good that everyone respect the it by not giving a shit"
+}
+*/
+
+export default function ResourceCard({ viewHandler, data_object, onEdit,card_id }) {
+    const { status, type, name, location, info } = data_object;
+
     const color = () => {
         if (!status) return "";
         if (status.toLowerCase() === "available")
@@ -30,7 +45,9 @@ export default function ResourceCard({ animationClassName, name, location, statu
             <p className="resource-text">{info}</p>
 
             <div className="resource-card-buttons">
-                {buttons.map((b, i) => <button key={`card-button ${i}`}>{b}</button>)}
+                <button onClick={() => { viewHandler(); }}>view</button>
+                <button onClick={() => { onEdit(); }}>update</button>
+                <button>delete</button>
             </div>
         </div>
     );

@@ -129,6 +129,14 @@
     rotate: 0deg;
     transition: ease all 0.4s;
 }
+/*clicked classes*/
+.clicked-mode-button {
+    color: var(--text-color,"white");
+    background-color: var(--dark-blue,"blue");
+}
+.clicked-mode-button:hover{
+    background-color: #232566;
+}
 
 /* 1. Set the width of the scrollbar */
 .resource-scroll-list::-webkit-scrollbar {

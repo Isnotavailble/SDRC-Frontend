@@ -6,7 +6,7 @@
     margin-top: 120px;
     background-color: #f8f8f8;
     box-shadow: 0px 0px 5px rgb(150, 139, 139);
-    border-radius: 12px;
+    border-radius: 25px;
 }
 
 /*feature button row*/
@@ -55,4 +55,7 @@
     color: var(--dark-blue);
     stroke-width: 1.1px;
 
+}
+.responder-feature-container {
+    margin-top: 2px;
 }

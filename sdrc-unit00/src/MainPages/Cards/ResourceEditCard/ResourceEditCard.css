@@ -1,0 +1,94 @@
+.resource-edit-card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: white;
+    padding: 10px;
+    padding-left: 27px;
+    padding-right: 27px;
+    width: 437px;
+    min-width: 436px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px var(--card-shadow, "gray");
+}
+
+.resource-edit-card-container p {
+    font-size: 14px;
+    color: gray;
+    margin-bottom: 6px;
+
+}
+
+.resource-edit-card-container h2 {
+    position: relative;
+    left: 0px;
+    margin: 0px;
+    padding: 0px;
+    width: auto;
+    color: var(--dark-blue);
+    text-align: center;
+}
+
+.edit-card-first-row,
+.edit-card-third-row div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+
+
+
+.edit-card-first-row-el select,
+.edit-card-second-row select,
+.edit-card-third-row input {
+    border-radius: 10px;
+    padding: 10px;
+    width: 150px;
+    border: none;
+    color: var(--dark-blue);
+    box-shadow: 0px 0px 5px var(--card-shadow);
+
+}
+
+
+
+.edit-card-fourth-row textarea {
+    width: 330px;
+    padding: 20px;
+    outline: none;
+    border: none;
+    color: var(--dark-blue, "blue");
+    font-size: 17px;
+    box-shadow: 0px 0px 5px var(--card-shadow);
+    border-radius: 20px;
+    transition: ease all 0.5s;
+    resize: none;
+}
+
+.edit-card-first-row-el select:focus,
+.edit-card-second-row select:hover,
+.edit-card-third-row input:focus,
+.edit-card-fourth-row textarea:focus {
+
+    outline: none;
+    box-shadow: 0px 0px 10px var(--card-shadow);
+}
+
+.edit-card-fifth-row {
+    margin-top: 20px;
+}
+
+.edit-card-fifth-row button {
+    border-radius: 15px;
+    background-color: var(--dark-blue);
+    color: white;
+    padding: 10px;
+    width: 100px;
+    margin-left: 20px;
+    border: none;
+}
