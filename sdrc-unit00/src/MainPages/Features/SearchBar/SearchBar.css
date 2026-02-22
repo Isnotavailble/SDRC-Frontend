@@ -61,7 +61,7 @@
     gap: 6px;
     box-shadow: 0px 0px 5px var(--card-shadow);
     top: 30px;
-    width: 100px;
+    width: 120px;
     height: 0px;
     overflow: hidden;
     left: -95px;
@@ -77,7 +77,7 @@
     background-color: white;
     border: none;
     box-shadow: 0px 0px 5px var(--card-shadow, "gray");
-    width: 70px;
+    width: 80px;
     font-size: 12px;
     color: gray;
     height: 30px;
@@ -112,6 +112,11 @@
     margin-left: 5px;
     width: 70px;
     transition: ease all 0.3s;
+}
+.filter-buttons button {
+    width: fit-content;
+    padding-left:10px;
+    padding-right: 10px;
 }
 
 .searchbar-box .search-btn:hover,

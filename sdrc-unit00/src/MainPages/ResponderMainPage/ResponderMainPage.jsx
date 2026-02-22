@@ -2,6 +2,7 @@ import { Ambulance, Circle, MapPinned, Navigation } from "lucide-react";
 import "./ResponderMainPage.css"
 import { useEffect, useState } from "react";
 import MonitorResources from "../Features/Monitor_Resources/MonitorResources";
+import MonitorDisasters from "../Features/Monitor_Disasters/MonitorDisaster";
 
 export default function ResponderMainPage() {
     const features = ["resources", "disasters", "alerts"];
@@ -21,7 +22,7 @@ export default function ResponderMainPage() {
                     <Ambulance className="responder-main-page-icon" />
                     <p>Resources</p>
                 </button>
-                <button>
+                <button onClick={() => { setCurrentMode(features[1]); }}>
                     <MapPinned className="responder-main-page-icon" />
                     <p>Disasters</p>
                 </button>
@@ -33,7 +34,8 @@ export default function ResponderMainPage() {
 
             {/* feature context */}
             <div className="responder-feature-container">
-                {currentMode === features[0] && <MonitorResources/> }
+                {currentMode === features[0] && <MonitorResources />}
+                {currentMode === features[1] && <MonitorDisasters />}
             </div>
 
         </div>

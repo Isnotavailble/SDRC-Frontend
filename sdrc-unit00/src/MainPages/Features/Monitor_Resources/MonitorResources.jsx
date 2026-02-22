@@ -28,9 +28,33 @@ expected format for Cards state :
         }
 */
 
+//helper fucntion for close btn
+//the Flow make 0px to maxWidth, remove box shadow and padding (inner width)
+//updated : export this helper function to reused in disaster event feature
+export const closeBtnHandler = (leftSideBar) => {
+    const l = leftSideBar.current["left_side_bar"];
+    const closeIcon = leftSideBar.current["close-btn"];
+    const closeBtn = leftSideBar.current["close-icon"];
+    const hiding_place = leftSideBar.current["hiding_place"];
+
+    if (!l || !closeBtn || !closeIcon || !hiding_place) return;
+
+    // Check if the sidebar is already fully closed
+    const isOpened = l.style.maxWidth === "0px";
+
+    // If it is closed, open it. If it is open (or empty on first click), close it.
+    closeBtn.style.rotate = isOpened ? "0deg" : "180deg";
+    l.style.maxWidth = isOpened ? "600px" : "0px";
+    l.style.padding = isOpened ? "5px" : "0px";
+    l.style.boxShadow = isOpened ? "0px 0px 5px var(--card-shadow)" : "none";
+    //l.style.opacity = isOpened ? "1" : "0";
+    hiding_place.style.opacity = isOpened ? "1" : "0";
+}
+
 export default function MonitorResources() {
 
     const filter_options = ["Default", "Shelter", "Hospital", "Supplies"];
+    const secondary_filter_options = ["name", "location", "status"];
     const modeList = ["default layout", "map layout", "add resource"];
     const [mode, setMode] = useState(modeList[0]);
 
@@ -45,7 +69,6 @@ export default function MonitorResources() {
     const [editingCardId, setEditingCardId] = useState(null);//key id of card-1-i
     const [scrollTarget, setScrollTarget] = useState(null);//key id of card-1-i
     const leftSideBar = useRef({});
-
 
     useEffect(() => {
 
@@ -81,25 +104,7 @@ export default function MonitorResources() {
             setEditingCardId(null);
         }
     }, [mode]);
-    //helper fucntion for close btn
-    //the Flow make 0px to maxWidth, remove box shadow and padding (inner width)
-    const closeBtnHandler = () => {
-        const l = leftSideBar.current["left_side_bar"];
-        const closeIcon = leftSideBar.current["close-btn"];
-        const closeBtn = leftSideBar.current["close-icon"];
 
-        if (!l || !closeBtn || !closeIcon) return;
-
-        // Check if the sidebar is already fully closed
-        const isOpened = l.style.maxWidth === "0px";
-
-        // If it is closed, open it. If it is open (or empty on first click), close it.
-        closeBtn.style.rotate = isOpened ? "0deg" : "180deg";
-        l.style.maxWidth = isOpened ? "600px" : "0px";
-        l.style.padding = isOpened ? "5px" : "0px";
-        l.style.boxShadow = isOpened ? "0px 0px 5px var(--card-shadow)" : "none";
-        L.style.opacity = isOpened ? "1" : "0";
-    }
 
     // Create a function to handle the click from the map
     const handleMapClick = (latlng) => {
@@ -153,7 +158,7 @@ export default function MonitorResources() {
         <div className="monitor-resource-container">
             <h1>Monitor Resources</h1>
             <div className="line"></div>
-            <SearchBar filter_options={filter_options} />
+            <SearchBar filter_options={filter_options} dropDownMaxHeight={120} secondaryHeight={121} secondary_filter_options={secondary_filter_options} />
             <button className={`add-button layout-button ${mode === modeList[0] && "clicked-mode-button"}`} onClick={() => setMode(modeList[0])}>Default Layout</button>
             <button className={`add-button layout-button ${mode === modeList[1] && "clicked-mode-button"}`} onClick={() => setMode(modeList[1])}>Map Layout</button>
             <button className={`add-button ${mode === modeList[1] && editingCardId === "add-card" && "clicked-mode-button"}`} onClick={() => handleAddResource()}>Add a resource</button>
@@ -188,29 +193,31 @@ export default function MonitorResources() {
                     <div className="resource-map-layout">
 
                         <div className="resource-map-left" ref={el => { if (el) leftSideBar.current["left_side_bar"] = el }}>
-                            <h2>Disaster Events </h2>
-                            <button className="close-side-bar-btn" ref={el => { if (el) leftSideBar.current["close-btn"] = el }} onClick={() => { closeBtnHandler(); }}>
+                            <button className="close-side-bar-btn" ref={el => { if (el) leftSideBar.current["close-btn"] = el }} onClick={() => { closeBtnHandler(leftSideBar); }}>
                                 <ArrowLeft className="close-side-bar-icon" ref={el => { if (el) leftSideBar.current["close-icon"] = el }} />
                             </button>
+                            <div ref={el => { if (el) leftSideBar.current["hiding_place"] = el }} style={{transition : "ease all 0.5s"}}>
+                                <h2>Resource Areas</h2>
+                                <div className="resource-scroll-list">
+                                    {/*add a resource card this will only appear if user click ADD button */
+                                        editingCardId === "add-card" &&
+                                        <ResourceEditCard onCancle={handleCancel} openAddOption={true} selectedGeoPoint={selectedPoint} />
+                                    }
+                                    {cards.map((r, i) =>
 
-                            <div className="resource-scroll-list">
-                                {/*add a resource card this will only appear if user click ADD button */
-                                    editingCardId === "add-card" &&
-                                    <ResourceEditCard onCancle={handleCancel} openAddOption={true} selectedGeoPoint={selectedPoint}/>
-                                }
-                                {cards.map((r, i) =>
-
-                                    <ResourceCardWrapper
-                                        data_object={r}
-                                        onCancel={handleCancel}
-                                        key={`card-1-${i}`}
-                                        selectedGeoPoint={selectedPoint}
-                                        onView={handleView}
-                                        isEditing={editingCardId === `card-1-${i}`}
-                                        onEdit={handleUpdate}
-                                        card_id={`card-1-${i}`} />
-                                )}
+                                        <ResourceCardWrapper
+                                            data_object={r}
+                                            onCancel={handleCancel}
+                                            key={`card-1-${i}`}
+                                            selectedGeoPoint={selectedPoint}
+                                            onView={handleView}
+                                            isEditing={editingCardId === `card-1-${i}`}
+                                            onEdit={handleUpdate}
+                                            card_id={`card-1-${i}`} />
+                                    )}
+                                </div>
                             </div>
+
                         </div>
                         { // This component is safe even hander is passed down . Import prop isEditing if it is true the handler is executed
                             selectedPoint &&
