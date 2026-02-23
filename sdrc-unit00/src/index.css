@@ -15,9 +15,10 @@
     --main-card-color: #ededed;
     --light-gray: #e1e1e1;
     --card-shadow: rgb(150, 139, 139);
-    --map-max-height : 690px;
+    --map-max-height: 690px;
 
 }
+
 @font-face {
     font-family: 'Roboto';
     src: url('./assets/Roboto/Roboto-VariableFont_wdth,wght.ttf') format('truetype-variations');
@@ -40,4 +41,12 @@ body {
 
     font-family: "Roboto";
 
+}
+
+.line {
+    width: 110px;
+    height: 3px;
+    background-color: rgb(182, 182, 182);
+    margin-bottom: 15px;
+    border-radius: 10px;
 }

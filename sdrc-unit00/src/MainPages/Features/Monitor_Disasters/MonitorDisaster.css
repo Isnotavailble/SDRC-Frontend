@@ -6,14 +6,13 @@
     color: var(--dark-blue, "blue");
     margin-bottom: -2px;
     letter-spacing: 1.5px;
-    font-size: 28px;
+    font-size: 24px;
 }
 
 .monitor-disaster-container .line {    
     width: 110px;
-    height: 5px;
+    height: 3px;
     background-color: rgb(182, 182, 182);
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border-radius: 10px;
-
 }

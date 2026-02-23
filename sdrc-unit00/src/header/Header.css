@@ -9,14 +9,14 @@
     box-shadow: 0px 0px 10px black;
     background-color: var(--dark-blue, "blue");
     color: var(--text-color);
-    z-index: 10;
+    z-index: 101;
 
 }
 
 .header-container,
 .header-right,
 .header-left {
-    
+
     display: flex;
     flex-direction: row;
 
@@ -26,19 +26,21 @@
 .header-left {
     align-items: center;
 }
+
 .header-left {
     margin-left: 30px;
     font-size: 12px;
     letter-spacing: 0.5px;
-    gap : 30px;
+    gap: 30px;
 }
+
 .header-right {
     position: absolute;
     gap: 11px;
     right: 0px;
     color: var(--dark-blue);
     margin-right: 10ch;
-    font-size: 12px;
+    font-size: 10px;
     background-color: var(--main-card-color);
     border-radius: 18px;
     box-shadow: 0px 0px 10px #ebebeb;
@@ -48,18 +50,24 @@
 }
 
 .header-menu-icon {
-    width: 35px;
-    height: 35px;
-    color: var(--text-color,"white");
+    position: relative;
+    width: 27px;
+    height: 27px;
+    color: var(--text-color, "white");
     border: 1px rgb(156, 156, 156) solid;
     border-radius: 6px;
-    
-    padding  : 3px;
-}
-.header-team-icon {
-    width : 35px;
-    height: 35px;
     padding: 3px;
-    color: var(--header-team-icon-color,"orange");
-       
+}
+.header-menu-icon:hover {
+    background-color: rgb(241, 241, 241);
+    color: var(--dark-blue);
+    border: 1px solid var(--dark-blue);
+    transition: ease all 0.3s;
+}
+
+.header-team-icon {
+    width: 30px;
+    height: 30px;
+    padding: 3px;
+    color: var(--header-team-icon-color, "orange");
 }

@@ -1,0 +1,26 @@
+.admin-approval-container {
+    position: relative;
+    min-height: 500px;
+    padding: 20px;
+    padding-left: 50px;
+    background-color: #f8f8f8;
+    box-shadow: 0px 0px 5px var(--card-shadow, "gray");
+    border-radius: 25px;
+}
+
+.admin-approval-container h1 {
+    font-size: 24px;
+    color: var(--dark-blue, "blue");
+}
+
+.admin-aproval-cards-list {
+    margin: 30px;
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    justify-content: left;
+    gap: 11px;
+}
+.admin-approval-line {
+    margin-top : -10px;
+}

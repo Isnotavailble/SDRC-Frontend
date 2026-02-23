@@ -3,6 +3,7 @@ import "./ResponderMainPage.css"
 import { useEffect, useState } from "react";
 import MonitorResources from "../Features/Monitor_Resources/MonitorResources";
 import MonitorDisasters from "../Features/Monitor_Disasters/MonitorDisaster";
+import AnimateInView from "../../Animations/AnimateInView";
 
 export default function ResponderMainPage() {
     const features = ["resources", "disasters", "alerts"];
@@ -26,10 +27,13 @@ export default function ResponderMainPage() {
                     <MapPinned className="responder-main-page-icon" />
                     <p>Disasters</p>
                 </button>
-                <button>
-                    <Navigation className="responder-main-page-icon" />
-                    <p>Alerts</p>
-                </button>
+                {/*Rejected Featre*/
+                    /*<button>
+                        <Navigation className="responder-main-page-icon" />
+                        <p>Alerts</p>
+                    </button>
+                    */
+                }
             </div>
 
             {/* feature context */}

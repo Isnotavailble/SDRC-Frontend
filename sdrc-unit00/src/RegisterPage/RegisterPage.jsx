@@ -15,10 +15,14 @@ function RegisterPage() {
     useEffect(() => {
         setAlreadyLoggedIn(localStorage.getItem("is_login") === "true" ? true : false);
     }, []);
+    const redirectHandler = () => {
+        const paht = localStorage.getItem("user_role") === "responder" ? "/responder/home" : "/admin/overview";
+        navigate(paht);
+    }
     return (
         <>
             <div className="auth-form-context">
-                <form method="POST" className="auth-form-container" onSubmit={(e) => { formHandler(e, { setError, setLoading,navigate }); }}>
+                <form method="POST" className="auth-form-container" onSubmit={(e) => { formHandler(e, { setError, setLoading, navigate }); }}>
                     <h1>Register</h1>
                     <p style={{ marginTop: "-10px", color: "gray" }}>Create an account to be part of this platform</p>
                     <label>
@@ -64,7 +68,7 @@ function RegisterPage() {
 
                             <div style={{ display: "flex", flexDirection: "row", gap: "5px", marginTop: "10px" }}>
                                 <button type={"submit"}>Login</button>
-                                <button className="back-button" onClick={() => { navigate("/responder/centre"); }}>Back To Centre</button>
+                                <button className="back-button" onClick={() => { redirectHandler(); }}>Back To Centre</button>
                             </div> :
 
                             <button type="submit">Register</button>}

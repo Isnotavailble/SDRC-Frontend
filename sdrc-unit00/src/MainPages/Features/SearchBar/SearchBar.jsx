@@ -13,7 +13,7 @@ export default function SearchBar({ filter_options, dropDownMaxHeight, secondary
     const [selectedField, setSelectedField] = useState(null)
     const [dropDownMode, setDropDownMode] = useState(dropMode[0]);
 
-//drop down height handler
+    //drop down height handler
     function dropDownHandler(refKey, button, data) {
         // 1. Define 'el' up here so all the 'if' blocks can see it!
         const el = drop.current[refKey];
@@ -26,18 +26,24 @@ export default function SearchBar({ filter_options, dropDownMaxHeight, secondary
             setDropDownMode(dropMode[0]);
             return;
         }
-        
+
         if (button === "parent") {
             setDropDownMode(dropMode[1]);
             setSelectedType(data);
             // 2. This works now because 'el' is defined at the top
-            el.style.height = `${secondaryHeight}px`; 
+            el.style.height = `${secondaryHeight}px`;
             return;
         }
-        
+
         if (button === "child") {
             setDropDownMode(dropMode[0]);
-            setSelectedField(data);
+            
+            if (secondary_filter_options?.length > 0)
+                setSelectedField(data);
+
+            else
+                setSelectedType(data);
+
             el.style.height = "0px";
             return;
         }
@@ -57,7 +63,7 @@ export default function SearchBar({ filter_options, dropDownMaxHeight, secondary
 
                         {dropDownMode === dropMode[0] &&
                             filter_options.slice(1).map((o, i) =>
-                                <button key={"type-" + i} onClick={() => dropDownHandler("filter_drop", "parent", o)}>
+                                <button key={"type-" + i} onClick={() => dropDownHandler("filter_drop", secondary_filter_options?.length > 0 ? "parent" : "child", o)}>
                                     {o}
                                 </button>)
                         }

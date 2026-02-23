@@ -13,11 +13,16 @@ function LoginPage() {
     useEffect(() => {
         setAlreadyLoggedIn(localStorage.getItem("is_login") === "true" ? true : false);
     }, []);
+
+    const redirectHandler = () => {
+        const paht = localStorage.getItem("user_role") === "responder" ? "/responder/home" : "/admin/overview";
+        navigate(paht);
+    }
     return (
         <>
             <RegisterStyleProvider>
                 <div className="auth-form-context">
-                    <form method="POST" className="auth-form-container login-form-container" onSubmit={(e) => { loginFormHandler({ e, setLoading, setError,navigate }); }}>
+                    <form method="POST" className="auth-form-container login-form-container" onSubmit={(e) => { loginFormHandler({ e, setLoading, setError, navigate }); }}>
 
                         <h1>Login</h1>
                         <p style={{ color: "gray", marginTop: "-4px" }}>Please fill your crendetails correctly</p>
@@ -35,13 +40,13 @@ function LoginPage() {
 
                         {error === "already login this account" && <p style={{ color: "#e62525" }}>You already log in this account.</p>}
 
-                        { /*nested condition read this carefully*/ 
+                        { /*nested condition read this carefully*/
                             loading === "login process" ?
                                 <Loader className="form-icon spinner-animation-icon" /> :
                                 alreadyLoggedIn === true ?
                                     <div style={{ display: "flex", flexDirection: "row", gap: "5px", marginTop: "10px" }}>
                                         <button type={"submit"}>Login</button>
-                                        <button className="back-button" onClick={() => { navigate("/responder/centre"); }}>Back To Centre</button>
+                                        <button className="back-button" onClick={() => { redirectHandler(); }}>Back To Centre</button>
                                     </div> :
 
                                     <button type={"submit"}>Login</button>

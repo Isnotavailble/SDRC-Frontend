@@ -1,0 +1,10 @@
+.admin-disaster-container{
+    position: relative;
+    min-height: 500px;
+    padding: 20px;
+    margin: 50px;
+    margin-top: 120px;
+    background-color: #f8f8f8;
+    box-shadow: 0px 0px 5px var(--card-shadow, "gray");
+    border-radius: 25px;
+}

@@ -1,0 +1,41 @@
+.side-nav-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 45px;
+    position: fixed;
+    top: 100px;
+    left: 0px;
+    padding-left: 10px;
+    padding-right: 14px;
+    background-color: var(--dark-blue, "blue");
+    height: 100vh;
+    width: 130px;
+    overflow: hidden;
+    z-index: 104;
+    box-shadow: 3px 5px 5px var(--card-shadow, "gray");
+}
+
+.side-nav-container a {
+    position: relative;
+    top: 30px;
+    font-size: 12px;
+    min-width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    text-decoration: none;
+    gap: 10px;
+    color: white;
+    color: var(--text-color, "white");
+}
+
+.side-nav-container a:hover {
+    color: var(--card-shadow, "blue");
+
+}
+
+.side-nav-icon {
+    width: 24px;
+    height: 24px;
+}

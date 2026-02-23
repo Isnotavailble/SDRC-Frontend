@@ -1,0 +1,55 @@
+.request-card-container {
+    position: relative;
+    padding: 15px;
+    padding-left: 20px;
+    
+    background-color: white;
+    box-shadow: 0px 0px 5px var(--card-shadow, "gray");
+    border-radius: 25px;
+    width: 280px;
+}
+
+.request-status {
+    position: absolute;
+    right: 10px;
+    border-radius: 20px;
+    border: solid 1px;
+    font-size: 11px;
+    width: 50px;
+    text-align: center;
+    padding: 5px;
+    color: var(--dark-blue, "blue");
+    font-weight: bold;
+}
+
+.request-card-container h3 {
+    font-size: 16px;
+    color: var(--dark-blue, "blue")
+}
+
+.request-card-container p {
+    color: gray;
+    font-size: 11px;
+    margin-bottom: -13px;
+}
+
+.request-card-container button {
+    color: white;
+    font-size: 11px;
+    width: 73px;
+    height: 27px;
+    background-color: var(--dark-blue, "blue");
+    border-radius: 8px;
+    border: none;
+    transition: ease all 0.3s;
+}
+.request-card-container .button-row{
+    display: flex;
+    gap: 10px;
+    justify-content: right;
+}
+
+.request-card-container button:hover {
+    width: 80px;
+
+}

@@ -16,6 +16,7 @@ export async function formHandler(e , {setError,setLoading,navigate}) {
     setLoading(null);
     localStorage.setItem("is_login" , "true");
     localStorage.setItem("user_phone",data["phonenumber"]);
+    localStorage.setItem("user_role","responder");
     navigate("/responder/centre");
     
 }
