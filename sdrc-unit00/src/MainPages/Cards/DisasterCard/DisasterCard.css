@@ -14,7 +14,8 @@
 .disaster-type-row {
     display: flex;
     align-items: center;
-    gap: 8px; /* Increased gap slightly to match the image */
+    gap: 8px;
+    /* Increased gap slightly to match the image */
     margin-bottom: 15px;
 }
 
@@ -34,12 +35,16 @@
 
 .disaster-severity-badge {
     position: absolute;
-    top: 25px; /* Added top positioning */
-    right: 27px; /* Aligned with your container's padding-right */
+    top: 25px;
+    /* Added top positioning */
+    right: 27px;
+    /* Aligned with your container's padding-right */
     border: solid 1px;
-    border-radius: 15px; /* Slightly rounder to match the image */
+    border-radius: 15px;
+    /* Slightly rounder to match the image */
     text-align: center;
-    padding: 4px 20px; /* Adjusted padding to match the image's pill shape */
+    padding: 4px 20px;
+    /* Adjusted padding to match the image's pill shape */
     font-size: 13px;
     font-weight: 600;
 }
@@ -53,7 +58,8 @@
 
 .disaster-text {
     margin: 0;
-    font-size: 14px; /* Increased slightly for readability */
+    font-size: 14px;
+    /* Increased slightly for readability */
     letter-spacing: 0.5px;
     color: rgb(59, 59, 59);
 }

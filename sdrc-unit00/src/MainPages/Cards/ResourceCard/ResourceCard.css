@@ -1,71 +1,87 @@
 .resource-card-container {
     position: relative;
     background-color: white;
-    padding : 10px;
-    padding-left: 27px;
-    padding-right: 27px;
-    width: 437px;
+    padding: 10px;
+    padding-left: 22px;
+    padding-top: 3px;
+    padding-right: 22px;
+    width: 317px;
     min-height: 300px;
-    min-width: 436px;
+    min-width: 320px;
     border-radius: 20px;
-    box-shadow:0px 0px 5px var(--card-shadow,"gray");
+    box-shadow: 0px 0px 5px var(--card-shadow, "gray");
 }
+
 .resource-type-row {
     display: flex;
-    align-items: center;gap: 5px;
+    align-items: center;
+    gap: 8px;
 }
-.resource-type-row h3{
+
+.resource-type-row h3 {
     text-transform: capitalize;
     font-size: 24px;
-    color: var(--dark-blue,"blue");
+    color: var(--dark-blue, "blue");
 }
+
 .resource-icon {
     width: 35px;
     height: 35px;
     stroke-width: 1.3px;
-    color : var(--dark-blue,"blue");
+    color: var(--dark-blue, "blue");
 }
+
 .resource-status {
     position: absolute;
-    right: 11px;
-    border : solid 1px;
+    top: 20px;
+    right: 21px;
+    border: solid 1px;
     border-radius: 13px;
     text-align: center;
-    padding : 6px;
-    padding-left : 20px;
-    padding-right: 20px;
-    font-size: 12px;
-    
+    padding: 6px;
+    font-weight: bold;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 10px;
+
 }
+
 .resource-text {
     margin-top: -19px;
-    font-size: 13px;
+    font-size: 14px;
     letter-spacing: 1px;
     color: rgb(59, 59, 59);
 }
+
 .resource-subheader {
     color: var(--dark-blue);
     font-size: 16px;
     margin-bottom: 22px;
 
 }
+
 .resource-card-buttons {
     display: flex;
     gap: 10px;
     justify-content: right;
+    position: absolute;
+    bottom: 20px;
+    right: 27px;
 }
+
 .resource-card-buttons button {
-    padding: 8px;
-    padding-left : 20px;
+    padding: 6px;
+    padding-left: 20px;
     padding-right: 20px;
-    border-radius: 10px;
+    border-radius: 8px;
     background-color: var(--dark-blue);
+    font-size: 12px;
     color: white;
     border: none;
     transition: ease all 0.3s;
-    
 }
-.resource-card-buttons button:hover{
- padding-left: 24px;
- padding-right: 27px;
+
+.resource-card-buttons button:hover {
+    padding-left: 25px;
+    padding-right: 25px;
 }

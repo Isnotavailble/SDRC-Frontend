@@ -170,7 +170,7 @@ export default function MonitorResources() {
                     {/*data list*/
                         cards.length > 0 ?
                             cards.map((r, i) => (
-                                <AnimateInView key={"card-1-" + i} delay={(i % 2) * 0.15}>
+                                <AnimateInView key={"card-1-" + i} delay={(i % 3) * 0.15}>
                                     <ResourceCardWrapper
                                         key={`card-1-${i}`}
                                         data_object={r}
@@ -196,7 +196,7 @@ export default function MonitorResources() {
                             <button className="close-side-bar-btn" ref={el => { if (el) leftSideBar.current["close-btn"] = el }} onClick={() => { closeBtnHandler(leftSideBar); }}>
                                 <ArrowLeft className="close-side-bar-icon" ref={el => { if (el) leftSideBar.current["close-icon"] = el }} />
                             </button>
-                            <div ref={el => { if (el) leftSideBar.current["hiding_place"] = el }} style={{transition : "ease all 0.5s"}}>
+                            <div ref={el => { if (el) leftSideBar.current["hiding_place"] = el }} style={{ transition: "ease all 0.5s" }}>
                                 <h2>Resource Areas</h2>
                                 <div className="resource-scroll-list">
                                     {/*add a resource card this will only appear if user click ADD button */

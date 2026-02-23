@@ -1,29 +1,29 @@
 .resource-edit-card-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     position: relative;
     background-color: white;
     padding: 10px;
-    padding-left: 27px;
-    padding-right: 27px;
-    width: 437px;
-    min-width: 436px;
+    padding-left: 25px;
+    padding-right: 25px;
+    width: 317px;
+    min-width: 317px;
     border-radius: 20px;
     box-shadow: 0px 0px 5px var(--card-shadow, "gray");
 }
 
 .resource-edit-card-container p {
-    font-size: 14px;
+    font-size: 12px;
     color: gray;
     margin-bottom: 6px;
-
 }
 
 .resource-edit-card-container h2 {
     position: relative;
     left: 0px;
+    font-size: 16px;
     margin: 0px;
     padding: 0px;
     width: auto;
@@ -36,38 +36,40 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
 }
 
-
-
-
 .edit-card-first-row-el select,
-.edit-card-second-row select,
 .edit-card-third-row input,
 .edit-card-second-row input {
     border-radius: 10px;
     padding: 10px;
-    width: 150px;
+    font-size: 12px;
+    width: fit-content;
     border: none;
     color: var(--dark-blue);
     box-shadow: 0px 0px 5px var(--card-shadow);
-
 }
+
+.edit-card-second-row input::placeholder {
+    font-size: 12px;
+}
+
+.edit-card-third-row input {
+    width: 80px;
+}
+
 .edit-card-second-row input {
-    width : 330px;
+    width: 180px;
 }
-
-
 
 .edit-card-fourth-row textarea {
-    width: 330px;
-    padding: 20px;
+    width: 300px;
+    padding: 16px;
     outline: none;
     border: none;
     color: var(--dark-blue, "blue");
-    font-size: 17px;
+    font-size: 14px;
     box-shadow: 0px 0px 5px var(--card-shadow);
     border-radius: 20px;
     transition: ease all 0.5s;
@@ -77,7 +79,8 @@
 .edit-card-first-row-el select:focus,
 .edit-card-second-row select:hover,
 .edit-card-third-row input:focus,
-.edit-card-fourth-row textarea:focus,.edit-card-second-row input:focus {
+.edit-card-fourth-row textarea:focus,
+.edit-card-second-row input:focus {
 
     outline: none;
     box-shadow: 0px 0px 10px var(--card-shadow);
@@ -91,8 +94,8 @@
     border-radius: 15px;
     background-color: var(--dark-blue);
     color: white;
-    padding: 10px;
     width: 100px;
+    height: 30px;
     margin-left: 20px;
     border: none;
 }

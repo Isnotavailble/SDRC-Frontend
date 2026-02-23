@@ -7,17 +7,16 @@
     color: var(--dark-blue, "blue");
     letter-spacing: 1.5px;
     margin-bottom: -2px;
-    font-size: 28px;
+    font-size: 24px;
 
 }
 
 .monitor-resource-container .line {
     width: 110px;
-    height: 5px;
+    height: 3px;
     background-color: rgb(182, 182, 182);
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     border-radius: 10px;
-
 }
 
 .add-button {
@@ -26,15 +25,16 @@
     border: none;
     background-color: white;
     color: gray;
-    margin-top: 20px;
-    height: 40px;
-    width: 130px;
+    margin-top: 17px;
+    font-size: 12px;
+    height: 38px;
+    width: 105px;
     box-shadow: 0px 0px 5px var(--card-shadow);
     transition: ease all 0.3s;
 
 }
 .layout-button {
-    margin-right: 20px;
+    margin-right: 15px;
 }
 
 .add-button:hover {
@@ -45,7 +45,7 @@
 /*setting default margin for all mode*/
 .resouces-flex-layout,
 .resource-map-layout {
-    margin-top: 30px;
+    margin-top: 25px;
 }
 
 /*defualut layout without map*/
@@ -54,8 +54,8 @@
     flex-direction: row;
     flex: 1;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 24px;
+    justify-content: left;
+    gap: 15px;
 }
 
 /*mode 1 layout with scroll bar and map*/
@@ -68,14 +68,14 @@
 .resource-map-layout .resource-map-left {
     position: relative;
     background-color: transparent;
+    justify-content: center;
     padding: 5px;
     max-width: 600px;
     width: 550px;
     max-height: var(--map-max-height);
     border-radius: 25px;
     height: 580px;
-    box-shadow: 0px 0px 5px var(--card-shadow);
- 
+    box-shadow: 0px 0px 5px var(--card-shadow); 
     transition: ease all 0.5s;
 
 }
@@ -95,7 +95,7 @@
     min-width: 20ch;
     left: 30px;
     color: var(--dark-blue, "blue");
-    letter-spacing: 1.1px;
+    letter-spacing: 1px;
     width: fit-content;
 
 }
