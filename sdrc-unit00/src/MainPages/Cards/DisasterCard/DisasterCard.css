@@ -1,10 +1,13 @@
 .disaster-card-container {
     position: relative;
     background-color: white;
-    padding: 20px 27px; /* Adjusted top/bottom padding slightly to balance the absolute badge */
-    width: 437px;
-    min-height: 200px; /* Reduced min-height slightly since this card has less text than the resource card */
-    min-width: 436px;
+    padding: 20px 27px;
+    /* Adjusted top/bottom padding slightly to balance the absolute badge */
+    width: 320px;
+    height: 180px;
+    min-height: 180px;
+    /* Reduced min-height slightly since this card has less text than the resource card */
+    min-width: 320px;
     border-radius: 20px;
     box-shadow: 0px 0px 5px var(--card-shadow, "gray");
     font-family: inherit;
@@ -21,15 +24,16 @@
 
 .disaster-type-row h3 {
     text-transform: capitalize;
-    font-size: 24px;
+    font-size: 18px;
+    letter-spacing: 1px;
     color: var(--dark-blue, #0b0b2a);
     margin: 0;
 }
 
 .disaster-icon {
-    width: 35px;
-    height: 35px;
-    stroke-width: 1.5px;
+    width: 26px;
+    height: 26px;
+    stroke-width: 1.8px;
     color: var(--dark-blue, #0b0b2a);
 }
 
@@ -45,7 +49,7 @@
     text-align: center;
     padding: 4px 20px;
     /* Adjusted padding to match the image's pill shape */
-    font-size: 13px;
+    font-size: 10px;
     font-weight: 600;
 }
 
@@ -53,12 +57,13 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .disaster-text {
     margin: 0;
-    font-size: 14px;
+    font-size: 12px;
+    font-weight: 500;
     /* Increased slightly for readability */
     letter-spacing: 0.5px;
     color: rgb(59, 59, 59);
@@ -67,7 +72,6 @@
 .disaster-card-buttons {
     display: flex;
     justify-content: right;
-    margin-top: 10px;
 }
 
 .disaster-card-buttons button {

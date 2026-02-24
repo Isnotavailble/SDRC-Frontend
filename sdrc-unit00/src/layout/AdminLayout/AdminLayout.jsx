@@ -5,6 +5,7 @@ import SideNavBar from "../../SideNav/SideNavBar";
 import "./AdminLayout.css";
 export default function AdminLayout() {
     const sideNavRef = useRef({});
+    const mainContentRef = useRef({});
     useEffect(() => {
         console.log("Page is loaded")
         console.log(sideNavRef.current)
@@ -13,9 +14,9 @@ export default function AdminLayout() {
     return (
         <>
 
-            <Header role={"admin"} name={"Kaung Cow"} targetRef={sideNavRef}/>
-            <SideNavBar ref={sideNavRef}/>
-            <div className="admin-layout-content">
+            <Header role={"admin"} name={"Kaung Cow"} targetRef={sideNavRef} mainContentRef={mainContentRef} />
+            <SideNavBar ref={sideNavRef} />
+            <div className="admin-layout-content" ref={mainContentRef}>
                 <Outlet />
             </div>
 

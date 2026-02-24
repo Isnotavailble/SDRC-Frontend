@@ -20,7 +20,7 @@ export async function loginFormHandler({ setError, e, setLoading, navigate }) {
     setLoading(null);
     localStorage.setItem("user_phone", data["phonenumber"]);
     localStorage.setItem("is_login", "true");
-    localStorage.setItem("user_role", response.role);
-    navigate("/responder/centre");
+    localStorage.setItem("user_role", );
+    navigate("/responder/home");
     return "ok"
 }

@@ -62,7 +62,7 @@
 .resource-map-layout {
     display: flex;
     flex-direction: row;
-    gap: 20px;
+    gap: 10px;
 }
 
 .resource-map-layout .resource-map-left {
@@ -83,7 +83,7 @@
 .resource-map-layout .resource-map-left .resource-scroll-list {
     display: flex;
     flex-direction: column;
-    gap:20px;
+    gap:10px;
     padding: 20px;
     max-height: 440px;
     overflow-x: hidden;
@@ -93,6 +93,7 @@
 .resource-map-left h2 {
     position: relative;
     min-width: 20ch;
+    font-size: 22px;
     left: 30px;
     color: var(--dark-blue, "blue");
     letter-spacing: 1px;
@@ -113,7 +114,6 @@
     right: 20px;
     color: var(--dark-blue);
     border-radius: 10px;
-    font-size: 14px;
     background-color: rgb(255, 255, 255);
     padding: 7px;
     box-shadow: 0px 0px 5px var(--card-shadow);
@@ -125,8 +125,8 @@
 .close-side-bar-icon {
     stroke-width: 2px;
     color: gray;
-    width: 29px;
-    height: 29px;
+    width: 18px;
+    height: 18px;
     rotate: 0deg;
     transition: ease all 0.4s;
 }

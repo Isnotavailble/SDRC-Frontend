@@ -1,12 +1,14 @@
 .request-card-container {
     position: relative;
     padding: 15px;
+    padding-top: 15px;
     padding-left: 20px;
-    
     background-color: white;
     box-shadow: 0px 0px 5px var(--card-shadow, "gray");
     border-radius: 25px;
     width: 280px;
+    height: 230px;
+    /* min-height removed to allow dynamic height */
 }
 
 .request-status {
@@ -37,13 +39,15 @@
     color: white;
     font-size: 11px;
     width: 73px;
+    margin-top: -7px;
     height: 27px;
     background-color: var(--dark-blue, "blue");
     border-radius: 8px;
     border: none;
     transition: ease all 0.3s;
 }
-.request-card-container .button-row{
+
+.request-card-container .button-row {
     display: flex;
     gap: 10px;
     justify-content: right;

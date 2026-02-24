@@ -1,0 +1,27 @@
+.send-alert-container {
+    position: relative;
+    min-height: 500px;
+    padding: 20px 27px;    
+    background-color: #f8f8f8;
+    box-shadow: 0px 0px 5px var(--card-shadow, "gray");
+    border-radius: 25px;
+}
+
+.send-alert-container h1 {
+    font-size: 24px;
+    color: var(--dark-blue, "blue");
+
+}
+.send-alert-container .label-for-title {
+    font-size: 14px;
+    color: gray;
+    margin-top: -10px;
+    margin-bottom: 15px;
+}
+.send-alert-context-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}

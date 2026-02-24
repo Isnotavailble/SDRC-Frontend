@@ -1,0 +1,131 @@
+.alert-form-container {
+    position: relative;
+    letter-spacing: 1px;
+    background-color: white;
+    padding: 30px;
+    padding-top:10px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 900px;
+    /* Added max-width so it doesn't stretch infinitely on huge screens */
+    min-height: 550px;
+    /* Changed to min-height so content won't overflow if it gets tall */
+    box-shadow: 0px 0px 5px var(--card-shadow, "gray");
+    box-sizing: border-box;
+    /* Ensures padding is included in width */
+}
+
+.alert-form-container h3 {
+    font-size: 24px;
+    color: var(--dark-blue, "blue");
+    margin-bottom: 10px;
+}
+
+.alert-form-container p {
+    font-size: 14px;
+    color: gray;
+    font-weight: 300;
+    margin-bottom: 7px;
+}
+
+.alert-form-first-row,
+.alert-form-second-row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+}
+
+/* FIX: Target the div wrappers inside the rows to share space equally */
+.alert-form-first-row div,
+.alert-form-second-row div {
+    flex: 1;
+    width: 100%;
+}
+
+.alert-form-first-row div select,
+.alert-form-second-row div select,
+.alert-form-third-row input {
+    border: none;
+    box-shadow: 0px 0px 3px var(--card-shadow, "gray");
+    width: 100%;
+    /* FIX: Changed from 350px to 100% */
+    box-sizing: border-box;
+    /* Keeps padding inside the 100% width */
+    padding: 5px 10px;
+    font-size: 14px;
+    color: var(--dark-blue, "blue");
+    margin-bottom: 12px;
+    border-radius: 7px;
+    height: 38px;
+}
+
+.alert-form-fifth-row {
+    display: flex;
+    justify-content: flex-end;
+    
+}
+
+.send-alert-btn {
+    position: relative;
+    top : 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    border: none;
+    font-size: 14px;
+    color: white;
+    width: 140px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: var(--dark-blue, "blue");
+    transition: ease all 0.3s;
+    cursor: pointer;
+    /* Added cursor pointer for better UX */
+}
+
+.send-alert-btn:hover {
+    width: 150px;
+}
+
+.alert-form-fouth-row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* Allow row to take full width */
+    margin-top: 10px;
+}
+
+.alert-form-fouth-row textarea {
+    width: 100%;
+    /* FIX: Changed from 500px to 100% */
+    box-sizing: border-box;
+    /* Keeps padding inside the width */
+    height: 120px;
+    /* Added explicit height so it doesn't look squished */
+    padding: 16px;
+    outline: none;
+    border: none;
+    color: var(--dark-blue, "blue");
+    font-size: 14px;
+    box-shadow: 0px 0px 5px var(--card-shadow, "gray");
+    border-radius: 20px;
+    transition: ease all 0.5s;
+    resize: none;
+    /* Let users resize it up and down if they want */
+}
+
+.alert-form-fouth-row textarea::placeholder {
+    font-size: 12px;
+    color: gray;
+}
+
+.alert-form-first-row div select:focus,
+.alert-form-second-row div select:focus,
+.alert-form-third-row input:focus,
+.alert-form-fouth-row textarea:focus {
+    box-shadow: 0px 0px 8px var(--card-shadow, "gray");
+    outline: none;
+    transition: ease all 0.3s;
+}

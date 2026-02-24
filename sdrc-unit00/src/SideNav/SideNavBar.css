@@ -14,6 +14,7 @@
     overflow: hidden;
     z-index: 104;
     box-shadow: 3px 5px 5px var(--card-shadow, "gray");
+    transition: ease all 0.3s;
 }
 
 .side-nav-container a {

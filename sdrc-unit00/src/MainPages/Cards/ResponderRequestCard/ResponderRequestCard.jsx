@@ -1,27 +1,36 @@
 import "./ResponderRequestCard.css";
 
 /*
-
  { id: 15, 
   name: "Robert Lewis",
    status: "Approved",
     region: "Central",
      phone: "222-111-0000" 
      }
-
 */
 
 export default function ResponderRequestCard({ data_object }) {
     const { status, name, region, phone, registered_date } = data_object;
+
+    // Safely standardize the status for our logic checks
+    const currentStatus = status ? status.toLowerCase() : "";
+
     const color = () => {
         if (!status) return "";
-        if (status.toLowerCase() === "approved") return "#21af09";
-        if (status.toLowerCase() === "rejected") return "#e62525";
-        return "#db6f00";
+        if (currentStatus === "approved") return "#21af09";
+        return "#db6f00"; // Default for pending
     }
+
     return (
         <div className="request-card-container">
-            <div className="request-status" style={{ borderColor: color(), color: color() }}>{status}</div>
+            <div className="request-status" style={{
+                borderColor: color(),
+                color: color(),
+                boxShadow: `0px 0px 5px ${color()}`
+            }}>
+                {status}
+            </div>
+
             <p>responder's name</p>
             <h3>{name || "Unknown"}</h3>
 
@@ -32,10 +41,17 @@ export default function ResponderRequestCard({ data_object }) {
             <h3>{phone || "Unknown"}</h3>
 
             <p>registered date</p>
-            <h3>{new Date(registered_date).toDateString() || "Unknown"}</h3>
+            {/* Safely check if date exists before parsing it */}
+            <h3>{registered_date ? new Date(registered_date).toDateString() : "Unknown"}</h3>
+
             <div className="button-row">
-                <button>Approved</button>
-                <button>Rejected</button>
+                {/* 1. Show both Approve and Reject for Pending requests */}
+                {currentStatus === "pending" && (
+                    <>
+                        <button className="approve-btn">Approve</button>
+                        <button className="reject-btn">Reject</button>
+                    </>
+                )}
             </div>
         </div>
     );

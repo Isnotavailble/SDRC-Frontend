@@ -11,7 +11,7 @@ import AnimateInView from "../../../Animations/AnimateInView";
 
 export default function MonitorDisasters() {
 
-    const filter_options = ["Default", "Earthquake", "Flood", "Storm"];
+    const filter_options = ["Default", "Low", "Medium", "High"];
     const secondary_options = ["serverity", "level", "time", "location"]
     const [disasters, setDisasters] = useState(null);
     const leftSideBar = useRef({});
