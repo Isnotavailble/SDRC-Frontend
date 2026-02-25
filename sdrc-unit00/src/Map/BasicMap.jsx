@@ -28,7 +28,7 @@ function BasicMap({ centerPoint, points, onMapClick ,isEditing }) {
     }, [centerPoint]);
 
     return (
-        <MapContainer center={centerPoint} zoom={13} scrollWheelZoom={true} className='basic-map-container'>
+        <MapContainer center={centerPoint || [16.8980,96.1311]} zoom={13} scrollWheelZoom={true} className='basic-map-container'>
             <MapResizer />
             <DynamicCenter centerPoint={centerPoint} />
             {isEditing && <MapClickEventHandler onMapClick={onMapClick} setSelectedPoint={setSelectedPoint} />}
@@ -38,9 +38,9 @@ function BasicMap({ centerPoint, points, onMapClick ,isEditing }) {
             />
             {points?.length > 0 &&
                 points.map((p, i) =>
-                    <Marker key={i} position={[p.lat, p.lon]}>
+                    <Marker key={i} position={[p.latitude, p.longitude]}>
                         <Popup>
-                            {p.name}
+                            {p.resource_name}
                         </Popup>
                     </Marker>)
             }

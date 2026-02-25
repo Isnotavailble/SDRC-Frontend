@@ -60,6 +60,17 @@
 
 }
 
+.time-label {
+    position: absolute;
+    margin-top: 18px;
+    margin-right: 14px;
+    font-size: 10px;
+    color: gray;
+
+
+
+}
+
 .resource-card-buttons {
     display: flex;
     gap: 10px;

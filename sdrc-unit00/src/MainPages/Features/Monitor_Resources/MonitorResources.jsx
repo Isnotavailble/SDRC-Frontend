@@ -7,7 +7,7 @@ import BasicMap from "../../../Map/BasicMap";
 import { ArrowLeft } from "lucide-react";
 import ResourceEditCard from "../../Cards/ResourceEditCard/ResourceEditCard";
 import ResourceCardWrapper from "../Wrappers/ResourceCardWrapper";
-import { fetchResources } from "../../../Util/fetchReources";
+import { addResource, deleteResource, fetchAllResources, updateResource } from "../../../Util/fetchReources";
 /*
 Layout summary : 
 
@@ -17,15 +17,17 @@ Layout summary :
 
 ----------------------------------------------------------------------
 expected format for Cards state : 
-        {
-            type: "hospital",
-            name: "My TownShit",
-            status: "closed",
-            location: "yangon",
-            lat: 16.8053,
-            lon: 96.1561, // General Yangon coordinates
-            info: "This place is so good that everyone respect the it by not giving a shit"
-        }
+
+{
+  "resource_name": "Community Shelter B",
+  "resource_type": "shelter",
+  "contact_info": "+959100000002",
+  "status": "Available",
+  "region": "နေပြည်တော် (ပြည်ထောင်စုနယ်မြေ)",
+  "latitude": 16.8835,
+  "created_at : 
+
+
 */
 
 //helper fucntion for close btn
@@ -57,10 +59,12 @@ export default function MonitorResources() {
     const secondary_filter_options = ["name", "location", "status"];
     const modeList = ["default layout", "map layout", "add resource"];
     const [mode, setMode] = useState(modeList[0]);
-
+    const [resources, setResources] = useState();
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(null);
     //api state
     const [cards, setCards] = useState(null);
-
+    useEffect(() => { console.log(resources) }, [resources])
     //this state never back to null because this act like a fallback state for map
     //for view button from resource card
     const [selectedPoint, setSelectedPoint] = useState(null);//the json object from cards list
@@ -71,15 +75,7 @@ export default function MonitorResources() {
     const leftSideBar = useRef({});
 
     useEffect(() => {
-
-        if (cards?.length > 0) return;
-        //simulated fetching ...
-        const fetchingData = async () => {
-            const r = await fetchResources(5);
-            setSelectedPoint(r[0]);
-            setCards(r);
-        }
-        fetchingData();
+        fetchAllResources({ setLoading, setError, setResources });
     }, []);
 
     useEffect(() => {
@@ -112,8 +108,8 @@ export default function MonitorResources() {
         setSelectedPoint(previousPoint => (
             {
                 ...previousPoint,
-                lat: Math.round(latlng.lat * 100000) / 100000,
-                lon: Math.round(latlng.lng * 100000) / 100000
+                latitude: Math.round(latlng.lat * 100000) / 100000,
+                longitude: Math.round(latlng.lng * 100000) / 100000
             }));
         // Example: If a card is currently being edited, you can save these 
         // coordinates to a state to pass to your <ResourceEditCard>!
@@ -154,6 +150,22 @@ export default function MonitorResources() {
             setMode(modeList[1]);
         setEditingCardId("add-card");
     }
+    //confirm add reouce btn handler 
+    const handleConfirmAdd = (data_object) => {
+        addResource({ data: data_object, setResources })
+        setEditingCardId(null);
+
+    }
+    //confirm update in edit card 
+    const handleConfirmUpdate = (data_object) => {
+        updateResource({ data: data_object, setError, setLoading, setResources });
+        setEditingCardId(null);
+    }
+    //delete resource btn handler 
+    const handleDeleteResource = (data_object) => {
+        console.log("data to be deleted", data_object)
+        deleteResource({ data: data_object, setResources });
+    }
     return (
         <div className="monitor-resource-container">
             <h1>Monitor Resources</h1>
@@ -165,15 +177,16 @@ export default function MonitorResources() {
 
 
             {/* normal layout without map only cards*/}
-            {mode === modeList[0] && cards ?
+            {mode === modeList[0] && resources ?
                 <div className="resouces-flex-layout">
                     {/*data list*/
-                        cards.length > 0 ?
-                            cards.map((r, i) => (
+                        resources.length > 0 ?
+                            resources.map((r, i) => (
                                 <AnimateInView key={"card-1-" + i} delay={(i % 3) * 0.15}>
                                     <ResourceCardWrapper
                                         key={`card-1-${i}`}
                                         data_object={r}
+                                        onDelete={handleDeleteResource}
                                         onView={handleView}
                                         isEditing={editingCardId === `card-1-${i}`}
                                         selectedGeoPoint={selectedPoint}
@@ -182,14 +195,18 @@ export default function MonitorResources() {
                                 </AnimateInView>
 
                             )) :
+                            <AnimateInView>
+                                <p style={{ color: "gray", marginTop: "60px", fontSize: "15px" }}>You currently have no data for resources</p>
+                            </AnimateInView>
 
-                            <p style={{ color: "gray", marginTop: "60px", fontSize: "15px" }}>You currently have no data for resources</p>
+
                     }
                 </div> : null
             }
             {/*map layout (Old school)*/}
-            {mode === modeList[1] && cards?.length > 0 ?
+            {mode === modeList[1] ?
                 <AnimateInView>
+
                     <div className="resource-map-layout">
 
                         <div className="resource-map-left" ref={el => { if (el) leftSideBar.current["left_side_bar"] = el }}>
@@ -201,13 +218,15 @@ export default function MonitorResources() {
                                 <div className="resource-scroll-list">
                                     {/*add a resource card this will only appear if user click ADD button */
                                         editingCardId === "add-card" &&
-                                        <ResourceEditCard onCancle={handleCancel} openAddOption={true} selectedGeoPoint={selectedPoint} />
+                                        <ResourceEditCard onCancle={handleCancel} onComfirn={handleConfirmAdd} openAddOption={true} selectedGeoPoint={selectedPoint} />
                                     }
-                                    {cards.map((r, i) =>
+                                    {resources.length > 0 && resources.map((r, i) =>
 
                                         <ResourceCardWrapper
                                             data_object={r}
                                             onCancel={handleCancel}
+                                            onDelete={handleDeleteResource}
+                                            onComfirn={handleConfirmUpdate}
                                             key={`card-1-${i}`}
                                             selectedGeoPoint={selectedPoint}
                                             onView={handleView}
@@ -219,11 +238,18 @@ export default function MonitorResources() {
                             </div>
 
                         </div>
-                        { // This component is safe even hander is passed down . Import prop isEditing if it is true the handler is executed
-                            selectedPoint &&
-                            <BasicMap centerPoint={[selectedPoint.lat, selectedPoint.lon]} points={cards} onMapClick={handleMapClick} isEditing={editingCardId !== null} />}
+
+
+                        <BasicMap
+                            centerPoint={selectedPoint && [selectedPoint.latitude, selectedPoint.longitude]}
+                            points={resources}
+                            onMapClick={handleMapClick}
+                            isEditing={editingCardId !== null}
+                        />
+
 
                     </div>
+
                 </AnimateInView>
                 :
                 null

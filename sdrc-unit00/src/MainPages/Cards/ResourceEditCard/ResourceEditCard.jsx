@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./ResourceEditCard.css";
+import { getRegions } from "../../../Util/fetchPostalCode";
 
 //This Component is for editing the card so edit and add is the same in purpose of this comp
 export default function ResourceEditCard({ data_object, onCancle, openAddOption, onComfirn, selectedGeoPoint }) {
@@ -22,18 +23,19 @@ export default function ResourceEditCard({ data_object, onCancle, openAddOption,
     }, []);
 
     const [inputData, setInputData] = useState({
-        type: data_object?.type || "hospital",
-        name: data_object?.name || "",
-        status: data_object?.status || "available",
-        location: data_object?.location || "",
-        lat: data_object?.lat || 0,
-        lon: data_object?.lon || 0,
-        info: data_object?.info || ""
+        id: data_object?.id || null,
+        resource_type: data_object?.resource_type || "hospital",
+        resource_name: data_object?.resource_name || "",
+        status: data_object?.status || "Available",
+        region: getRegions()[0].region,
+        latitude: data_object?.latitude || 0,
+        longitude: data_object?.longitude || 0,
+        contact_info: data_object?.contact_info || ""
     });
     useEffect(() => {
 
         if (selectedGeoPoint) {
-            setInputData(p => ({ ...p, lat: selectedGeoPoint.lat, lon: selectedGeoPoint.lon }))
+            setInputData(p => ({ ...p, latitude: selectedGeoPoint.latitude, longitude: selectedGeoPoint.longitude }))
         }
     }, [selectedGeoPoint]);
 
@@ -45,7 +47,8 @@ export default function ResourceEditCard({ data_object, onCancle, openAddOption,
             <div className="edit-card-first-row">
                 <div className="edit-card-first-row-el">
                     <p>Type</p>
-                    <select defaultValue={inputData.type} onChange={(e) => { setInputData(p => ({ ...p, type: e.target.value })); }}>
+                    <select defaultValue={inputData.type} onChange={(e) => { setInputData(p => ({ ...p, resource_type: e.target.value })); }}>
+
                         <option value={"hospital"} >Hospital</option>
                         <option value={"shelter"}  >Shelter</option>
                         <option value={"supplies"}>Supplies</option>
@@ -54,18 +57,18 @@ export default function ResourceEditCard({ data_object, onCancle, openAddOption,
                 <div className="edit-card-first-row-el">
                     <p>Status</p>
                     <select defaultValue={inputData.status} onChange={(e) => { setInputData(p => ({ ...p, status: e.target.value })) }}>
-                        <option value={"available"}>Available</option>
-                        <option value={"unavailable"} >Unavailable</option>
-                        <option value={"full"}>Full</option>
-                        <option value={"closed"}>Closed</option>
+                        <option value={"Available"}>Available</option>
+                        <option value={"Unavailable"} >Unavailable</option>
+                        <option value={"Full"}>Full</option>
+                        <option value={"Closed"}>Closed</option>
                     </select>
                 </div>
                 <div className="edit-card-first-row-el">
                     <p>Region</p>
-                    <select defaultValue={inputData.location} onChange={(e) => { setInputData(p => ({ ...p, locaiton: e.target.value })) }}>
-                        <option>Yangon</option>
-                        <option>Mandalay</option>
-                        <option>UK</option>
+                    <select defaultValue={getRegions()[0].region} onChange={(e) => { setInputData(p => ({ ...p, region: e.target.value })) }}>
+                        {getRegions().map((c, i) =>
+                            <option value={c.region} key={c.region_id}>{c.region}</option>)
+                        }
                     </select>
                 </div>
 
@@ -73,24 +76,24 @@ export default function ResourceEditCard({ data_object, onCancle, openAddOption,
 
             <div className="edit-card-second-row">
                 <p>Resource Name</p>
-                <input value={inputData.name} placeholder="Enter Resource name ..." type="text" onChange={(e) => { setInputData(p => ({ ...p, name: e.target.value.trim() })) }} />
+                <input value={inputData.resource_name} placeholder="Enter Resource name ..." type="text" onChange={(e) => { setInputData(p => ({ ...p, resource_name: e.target.value.trim() })) }} />
             </div>
 
             <div className="edit-card-third-row">
                 <p>Location</p>
                 <div>
-                    <input type="number" placeholder="latitude" value={inputData.lat} onChange={(e) => { setInputData((p) => ({ ...p, lat: e.target.value })) }} />
-                    <input type="number" placeholder="longitude" value={inputData.lon} onChange={(e) => { setInputData((p) => ({ ...p, lon: e.target.value })) }} />
+                    <input type="number" placeholder="latitude" value={inputData.latitude} onChange={(e) => { setInputData((p) => ({ ...p, latitude: e.target.value })) }} />
+                    <input type="number" placeholder="longitude" value={inputData.longitude} onChange={(e) => { setInputData((p) => ({ ...p, longitude: e.target.value })) }} />
                 </div>
                 <p style={{ textAlign: "center" }}>click or drag on map to auto fill</p>
             </div>
 
             <div className="edit-card-fourth-row">
-                <p>{`contact info(${inputData.info.length > 0 ? inputData.info.length : 0}/150) `}</p>
-                <textarea placeholder="Type info here" rows={5} maxLength={150} value={inputData.info} onChange={(e) => setInputData(p => ({ ...p, info: e.target.value }))} />
+                <p>{`contact info(${inputData.contact_info.length > 0 ? inputData.contact_info.length : 0}/150) `}</p>
+                <textarea placeholder="Type info here" rows={5} maxLength={150} value={inputData.contact_info} onChange={(e) => setInputData(p => ({ ...p, contact_info: e.target.value }))} />
             </div>
             <div className="edit-card-fifth-row">
-                <button onClick={() => onComfirn()}>Confirm</button>
+                <button onClick={() => onComfirn(inputData)}>Confirm</button>
                 <button onClick={() => onCancle()}>Cancel</button>
             </div>
         </div>
