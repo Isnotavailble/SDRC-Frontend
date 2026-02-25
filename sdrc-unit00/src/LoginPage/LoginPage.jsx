@@ -4,25 +4,30 @@ import { Loader, Phone, UserKey } from "lucide-react";
 import { useEffect, useState } from "react";
 import { loginFormHandler } from "./HandlerProvider";
 import "./LoginPage.css";
+import { useAuthContext } from "../AuthContext/AuthContextProvider";
 /*simulated design*/
 function LoginPage() {
+    const {user,setUser} = useAuthContext();
     const [loading, setLoading] = useState(null);
     const [error, setError] = useState(null);
     const [alreadyLoggedIn, setAlreadyLoggedIn] = useState(false);
     const navigate = useNavigate();
+
     useEffect(() => {
-        setAlreadyLoggedIn(localStorage.getItem("is_login") === "true" ? true : false);
-    }, []);
+        const isLogin = localStorage.getItem("user_token") ? true : false;
+        setAlreadyLoggedIn(isLogin);
+    }, [localStorage.getItem("user_token")]);
 
     const redirectHandler = () => {
-        const paht = localStorage.getItem("user_role") === "responder" ? "/responder/home" : "/admin/overview";
-        navigate(paht);
+        const userRole = JSON.parse(localStorage.getItem("user"))?.role;
+        const path = userRole === "responder" ? "/responder/home" : "/admin/overview";
+        navigate(path);
     }
     return (
         <>
             <RegisterStyleProvider>
                 <div className="auth-form-context">
-                    <form method="POST" className="auth-form-container login-form-container" onSubmit={(e) => { loginFormHandler({ e, setLoading, setError, navigate }); }}>
+                    <form method="POST" className="auth-form-container login-form-container" onSubmit={(e) => { loginFormHandler({ e, setLoading, setError, navigate,setUser }); }}>
 
                         <h1>Login</h1>
                         <p style={{ color: "gray", marginTop: "-4px" }}>Please fill your crendetails correctly</p>
@@ -38,7 +43,7 @@ function LoginPage() {
                             <input required autoComplete={"off"} type="password" placeholder="Enter your password" name="password" minLength={8} />
                         </label>
 
-                        {error === "already login this account" && <p style={{ color: "#e62525" }}>You already log in this account.</p>}
+                        {error && <p style={{ color: "#e62525" }}>{error}</p>}
 
                         { /*nested condition read this carefully*/
                             loading === "login process" ?
@@ -57,6 +62,7 @@ function LoginPage() {
                 </div>
 
             </RegisterStyleProvider>
+
         </>
     )
 }

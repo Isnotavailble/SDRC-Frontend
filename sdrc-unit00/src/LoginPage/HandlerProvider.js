@@ -1,26 +1,22 @@
-
-
-import { useNavigate } from "react-router-dom";
 import { doLogin } from "../Util/fetchAuth";
 
-export async function loginFormHandler({ setError, e, setLoading, navigate }) {
+export async function loginFormHandler({ setError, e, setLoading, navigate, setUser }) {
     e.preventDefault();
     const form = new FormData(e.target);
     const data = Object.fromEntries(form.entries());
+    const isLogin = localStorage.getItem("user_token") ? true : false;
+    const current_user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null;
 
-    if (data["phonenumber"].trim() === localStorage.getItem("user_phone")) {
+    if (isLogin && data["phonenumber"].trim() === current_user?.phone_number) {
         console.log("Already log in this account");
         setError("already login this account");
         return;
     }
-    setLoading("login process");
-    const response = await doLogin();
+    const res_data = await doLogin(data["phonenumber"], data["password"], setLoading, setError);
 
-    setError(null);
-    setLoading(null);
-    localStorage.setItem("user_phone", data["phonenumber"]);
-    localStorage.setItem("is_login", "true");
-    localStorage.setItem("user_role", );
-    navigate("/responder/home");
-    return "ok"
+    if (res_data) {
+        setUser(p => ({ ...p, login: true }));
+        navigate(res_data.user.role === "admin" ? "/admin/overview" : "/responder/home");
+    }
+
 }

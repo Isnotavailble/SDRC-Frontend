@@ -1,4 +1,3 @@
-
 .auth-form-context {
     position: fixed;
     top: 0px;
@@ -40,7 +39,8 @@ form label {
     position: relative;
 }
 
-form label input {
+form label input,
+form select {
 
     border-radius: 5px;
     padding: 4px;
@@ -111,15 +111,16 @@ form button {
     flex-wrap: nowrap;
 }
 
-.option-row select {
+/*tion-row select {
     color: var(--label-color, "black");
     border-radius: 5px;
     padding: 5px;
-    width: 170px;
+    width: 290px;
+    max-height: 90px;
     margin: 5px;
     border-color: var(--border-color, "gray");
     transition: all ease 0.2s;
-}
+}*/
 
 form button:hover {
     width: 150px;

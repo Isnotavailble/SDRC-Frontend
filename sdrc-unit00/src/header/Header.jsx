@@ -1,8 +1,10 @@
 import { LogOut, Menu } from "lucide-react";
 import "./Header.css";
 import page_icon from "../assets/tree.svg";
+import { useAuthContext } from "../AuthContext/AuthContextProvider";
 //update : menu button has been removed
 function Header({ role, targetRef, mainContentRef }) {
+    const { setUser } = useAuthContext();
     const menuHandler = () => {
         if (targetRef.current && mainContentRef.current) {
             if (targetRef.current.style.width === "130px") {
@@ -18,16 +20,23 @@ function Header({ role, targetRef, mainContentRef }) {
             }
         }
     };
+    const logoutHandler = () => {
+        localStorage.removeItem("user_token");
+        localStorage.removeItem("user");
+        setUser(p => ({ ...p, login: false }));
+        console.log("log out successfully");
+    }
+    const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null;
     return (
         <div className="header-container" style={{ position: role === "admin" ? "fixed" : "absolute" }} >
             {/*left side menu,webname*/}
             <div className="header-left">
-                {localStorage.getItem("user_role") === "admin" && <button className="header-menu-icon" onClick={() => menuHandler()}><Menu /></button>}
+                {user?.role === "admin" && <button className="header-menu-icon" onClick={() => menuHandler()}><Menu /></button>}
                 <img src={page_icon} className="page_icon" alt="Thik Pin Logo" />
                 <h1>Thik Pin</h1>
             </div>
             {/*right side team name*/}
-            <button className="header-right" onClick={() => { localStorage.setItem("user_role", ""); localStorage.setItem("is_login", "false"); }}>
+            <button className="header-right" onClick={() => logoutHandler()}>
                 Logout <LogOut size={18} />
 
             </button>

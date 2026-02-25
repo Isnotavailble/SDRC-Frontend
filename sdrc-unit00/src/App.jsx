@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Routes, Route, Navigate, useNavigate, useLocation } from "react-router-dom";
 import './App.css'
 import AuthLayout from './layout/AuthLayout/AuthLayout';
@@ -16,8 +16,11 @@ import AdminLayout from './layout/AdminLayout/AdminLayout';
 function App() {
   const { user } = useAuthContext();
   const l = useLocation();
+  const isLogin = localStorage.getItem("user_token") ? true : false;
+  const current_user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null;
 
   useEffect(() => { console.log("user at ", l.pathname), [l.pathname] });
+
   return (
     <>
       <Routes>
@@ -29,7 +32,7 @@ function App() {
 
         {/*Protected responder routes*/}
         <Route element={
-          localStorage.getItem("is_login") === "true" && localStorage.getItem("user_role") === "responder" ?
+          user.login && current_user.role === "responder" ?
             <ResponderMainLayout /> : <Navigate to={"/login"} />}
           path='responder'>
           <Route path='home' element={<ResponderMainPage />} />
@@ -37,8 +40,8 @@ function App() {
 
         {/*Protected admin routes*/}
         <Route path="admin" element={
-          localStorage.getItem("is_login") === "true" &&
-            localStorage.getItem("user_role") === "admin" ?
+          user.login &&
+            current_user.role === "admin" ?
             <AdminLayout /> : <Navigate to={"/login"} />}
         >
           <Route path="overview" element={<AdminOverviewPage />} />
@@ -46,7 +49,6 @@ function App() {
           <Route path='disasters' element={<AdminDisasterPage />} />
           <Route path='alerts' element={<AdminSendAlert />} />
         </Route>
-
 
       </Routes>
 
