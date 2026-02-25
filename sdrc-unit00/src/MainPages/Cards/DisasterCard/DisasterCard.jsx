@@ -3,7 +3,7 @@ import "./DisasterCard.css";
 import { useEffect } from "react";
 
 export default function DisasterCard({ viewHandler, data_object }) {
-    const { type, severity, severityValue, time, location } = data_object;
+    const { type, severity, severityValue, happened_at, location, time } = data_object;
 
     const color = () => {
         if (!severity) return "";
@@ -19,6 +19,7 @@ export default function DisasterCard({ viewHandler, data_object }) {
             <div className="disaster-severity-badge" style={{ borderColor: color(), color: color(), boxShadow: "0px 0px 3px " + color() }}>
                 {severity}
             </div>
+            <p>{time}</p>
 
             <div className="disaster-type-row">
                 {type.toLowerCase() === "earthquake" && <Activity className="disaster-icon" />}
@@ -29,7 +30,7 @@ export default function DisasterCard({ viewHandler, data_object }) {
 
             <div className="disaster-content">
                 <p className="disaster-text">Severity : {severityValue}</p>
-                <p className="disaster-text">Happened at : {time}</p>
+                <p className="disaster-text">Happened at : {happened_at}</p>
                 <p className="disaster-text">Location : {location}</p>
             </div>
 

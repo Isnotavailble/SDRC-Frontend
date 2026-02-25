@@ -1,4 +1,7 @@
-export async function fetchAllDisaster() {
+import axios from "axios";
+
+export async function fetchAllDisaster({ page = 1, page_size, setDisasters }) {
+
     const disaster = [
         {
             "id": 1,
@@ -51,6 +54,7 @@ export async function fetchAllDisaster() {
             "lon": 96.4833
         }
     ];
+
     await new Promise(r => setTimeout(r, 2000));
     return disaster;
 

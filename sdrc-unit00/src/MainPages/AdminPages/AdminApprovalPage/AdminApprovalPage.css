@@ -18,7 +18,7 @@
     display: flex;
     flex: 1;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: left;
     gap: 7px; 
 }
 .admin-approval-line {

@@ -50,3 +50,20 @@ body {
     margin-bottom: 15px;
     border-radius: 10px;
 }
+
+.mypage-loader {
+    color: gray;
+    width: 38px;
+    height: 38px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

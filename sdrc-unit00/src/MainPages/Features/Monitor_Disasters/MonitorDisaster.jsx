@@ -16,6 +16,8 @@ export default function MonitorDisasters() {
     const [disasters, setDisasters] = useState(null);
     const leftSideBar = useRef({});
     const [selectedEvent, setSelectedEvent] = useState(null);
+    //page count for infinit scroll
+    
     useEffect(() => {
         const fetch_process = async () => {
             const response = await fetchAllDisaster();

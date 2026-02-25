@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import "./ResponderRequestCard.css";
 
 /*
@@ -9,27 +10,20 @@ import "./ResponderRequestCard.css";
      }
 */
 
-export default function ResponderRequestCard({ data_object }) {
-    const { status, name, region, phone, registered_date } = data_object;
-
-    // Safely standardize the status for our logic checks
-    const currentStatus = status ? status.toLowerCase() : "";
-
-    const color = () => {
-        if (!status) return "";
-        if (currentStatus === "approved") return "#21af09";
-        return "#db6f00"; // Default for pending
-    }
+export default function ResponderRequestCard({ data_object, onApproved }) {
+    const { id, status, name, region, phone, registered_date, time } = data_object;
+    const [isApproved, setApproved] = useState(status.toLowerCase() === "approved");
 
     return (
         <div className="request-card-container">
             <div className="request-status" style={{
-                borderColor: color(),
-                color: color(),
-                boxShadow: `0px 0px 5px ${color()}`
+                borderColor: isApproved ? "#21af09" : "#db6f00",
+                color: isApproved ? "#21af09" : "#db6f00",
+                boxShadow: `0px 0px 5px ${isApproved ? "#21af09" : "#db6f00"}`
             }}>
                 {status}
             </div>
+            <p className="time-label">{time}</p>
 
             <p>responder's name</p>
             <h3>{name || "Unknown"}</h3>
@@ -46,13 +40,15 @@ export default function ResponderRequestCard({ data_object }) {
 
             <div className="button-row">
                 {/* 1. Show both Approve and Reject for Pending requests */}
-                {currentStatus === "pending" && (
+                {!isApproved && (
                     <>
-                        <button className="approve-btn">Approve</button>
-                        <button className="reject-btn">Reject</button>
+                        <button className="approve-btn" onClick={() => {
+                            const s = onApproved(id);
+                            setApproved(s);
+                        }}>Approve</button>
                     </>
                 )}
             </div>
-        </div>
+        </div >
     );
 }

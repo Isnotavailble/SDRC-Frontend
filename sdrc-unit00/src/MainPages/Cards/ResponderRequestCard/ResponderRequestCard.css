@@ -7,7 +7,7 @@
     box-shadow: 0px 0px 5px var(--card-shadow, "gray");
     border-radius: 25px;
     width: 280px;
-    height: 230px;
+    height: 235px;
     /* min-height removed to allow dynamic height */
 }
 
@@ -36,11 +36,13 @@
 }
 
 .request-card-container button {
+    position: relative;
+    right: 6px;
     color: white;
-    font-size: 11px;
-    width: 73px;
-    margin-top: -7px;
-    height: 27px;
+    font-size: 12px;
+    width: 82px;
+    margin-top: -14px;
+    height: 28px;
     background-color: var(--dark-blue, "blue");
     border-radius: 8px;
     border: none;
@@ -50,10 +52,18 @@
 .request-card-container .button-row {
     display: flex;
     gap: 10px;
+
     justify-content: right;
 }
 
 .request-card-container button:hover {
-    width: 80px;
+    width: 89px;
 
+}
+
+.time-label {
+    position: absolute;
+    right: 15px;
+    top: 40px;
+    font-weight: 500;
 }

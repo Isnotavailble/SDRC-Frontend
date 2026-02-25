@@ -1,0 +1,39 @@
+// utils.js (or whatever you name your helper file)
+
+export function timeAgo(dateString) {
+    if (!dateString) return "";
+
+    const past = new Date(dateString);
+    const now = new Date();
+
+    // Get the difference in seconds
+    const diffInSeconds = Math.floor((now - past) / 1000);
+
+    // If the time is in the future or within the last 60 seconds
+    if (diffInSeconds < 60) {
+        return "just now";
+    }
+
+    const minutes = Math.floor(diffInSeconds / 60);
+    if (minutes < 60) {
+        return `${minutes} min${minutes === 1 ? '' : 's'} ago`;
+    }
+
+    const hours = Math.floor(diffInSeconds / 3600);
+    if (hours < 24) {
+        return `${hours} hour${hours === 1 ? '' : 's'} ago`;
+    }
+
+    const days = Math.floor(diffInSeconds / 86400);
+    if (days < 30) {
+        return `${days} day${days === 1 ? '' : 's'} ago`;
+    }
+
+    const months = Math.floor(days / 30);
+    if (months < 12) {
+        return `${months} month${months === 1 ? '' : 's'} ago`;
+    }
+
+    const years = Math.floor(days / 365);
+    return `${years} year${years === 1 ? '' : 's'} ago`;
+}

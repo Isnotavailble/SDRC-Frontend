@@ -3,29 +3,24 @@ import SearchBar from "../../Features/SearchBar/SearchBar";
 import "./AdminApprovalPage.css";
 import ResponderRequestCard from "../../Cards/ResponderRequestCard/ResponderRequestCard";
 import AnimateInView from "../../../Animations/AnimateInView";
+import { Loader } from "lucide-react";
+import { fetchAllDisaster } from "../../../Util/fetchDisaster";
+import { getAllResponders } from "../../../Util/fetchResponders";
+import { approveResponder } from "../../../Util/fetchApproveResponder";
 export default function AdminApprovalPage() {
     const filter_options = ["Default", "Approved", "Pending"];
+    const [loading, setLoading] = useState("getting responders");
+    const [error, setError] = useState(null);
     const [responders, setResponders] = useState(null);
+    const [filterMode, setFilterMode] = useState(null);
+
+    const approveBtnHandler = (responder_id) => {
+        const ok = approveResponder({ setError, setLoading, responder_id });
+        return ok? "approved" : "pending";
+    }
+
     useEffect(() => {
-        const fetchResponders = async () => {
-            const dummyUsers = [
-                { id: 1, name: "John Doe", status: "Pending", region: "North", phone: "123-456-7890", registered_date: "2026-01-15" },
-                { id: 2, name: "Jane Smith", status: "Approved", region: "South", phone: "098-765-4321", registered_date: "2026-01-18" },
-                { id: 4, name: "Emily Davis", status: "Approved", region: "West", phone: "444-987-6543", registered_date: "2026-01-25" },
-                { id: 5, name: "Chris Brown", status: "Pending", region: "Central", phone: "333-555-7890", registered_date: "2026-02-01" },
-                { id: 6, name: "Sarah Wilson", status: "Approved", region: "North", phone: "222-333-4444", registered_date: "2026-02-03" },
-                { id: 7, name: "David Miller", status: "Pending", region: "South", phone: "777-888-9999", registered_date: "2026-02-05" },
-                { id: 9, name: "Matthew Anderson", status: "Approved", region: "West", phone: "999-444-5555", registered_date: "2026-02-12" },
-                { id: 10, name: "Ashley Thomas", status: "Pending", region: "Central", phone: "111-222-3333", registered_date: "2026-02-14" },
-                { id: 11, name: "Daniel Martinez", status: "Approved", region: "North", phone: "888-777-6666", registered_date: "2026-02-15" },
-                { id: 13, name: "James Robinson", status: "Pending", region: "East", phone: "444-333-2222", registered_date: "2026-02-20" },
-                { id: 14, name: "Laura Clark", status: "Approved", region: "West", phone: "333-222-1111", registered_date: "2026-02-22" },
-                { id: 15, name: "Robert Lewis", status: "Approved", region: "Central", phone: "222-111-0000", registered_date: "2026-02-23" }
-            ];
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            setResponders(dummyUsers);
-        }
-        fetchResponders();
+        getAllResponders({ setError, setLoading, setResponders });
     }, []);
     return (
         <div className="admin-approval-container">
@@ -40,12 +35,18 @@ export default function AdminApprovalPage() {
                     responders?.length > 0 && responders.map((r, i) =>
 
                         <AnimateInView delay={(i % 3) * 0.15} key={`responder-${r.id}-${i}`}>
-                            <ResponderRequestCard data_object={r} />
+                            <ResponderRequestCard data_object={r} onApproved={approveBtnHandler} />
                         </AnimateInView>
 
                     )
                 }
             </div>
+            {loading === "getting responders" && <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "200px"
+            }}><Loader className="mypage-loader" /></div>}
         </div>
     );
 }

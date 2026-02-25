@@ -1,5 +1,5 @@
 //simulated fetch
-export async function getRegions() {
+export function getRegions() {
     const regions = [
         { "region_id": "d3171204-a8f5-4a17-bfd5-258079d0ecb0", "region": "တနင်္သာရီတိုင်းဒေသကြီး" },
         { "region_id": "19c92ff8-b996-41df-8d27-e21da8c9d377", "region": "နေပြည်တော် (ပြည်ထောင်စုနယ်မြေ)" },

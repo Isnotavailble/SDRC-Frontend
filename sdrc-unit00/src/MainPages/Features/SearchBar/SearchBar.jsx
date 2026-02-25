@@ -6,7 +6,10 @@ filter_optins :  [] string
 add_options :  add btn label
 Note : I use search icon in line styling ..
 */
-export default function SearchBar({ filter_options, dropDownMaxHeight, secondary_filter_options, secondaryHeight }) {
+export default function SearchBar({ filter_options,
+    dropDownMaxHeight,
+    secondary_filter_options,
+    secondaryHeight,handlers }) {
     const drop = useRef({});
     const dropMode = ["by parents", "by fields"]
     const [selectedType, setSelectedType] = useState(null);
@@ -37,7 +40,7 @@ export default function SearchBar({ filter_options, dropDownMaxHeight, secondary
 
         if (button === "child") {
             setDropDownMode(dropMode[0]);
-            
+
             if (secondary_filter_options?.length > 0)
                 setSelectedField(data);
 
