@@ -12,12 +12,12 @@ import AnimateInView from "../../../Animations/AnimateInView";
 export default function MonitorDisasters() {
 
     const filter_options = ["Default", "Low", "Medium", "High"];
-    const secondary_options = ["serverity", "level", "time", "location"]
+    const secondary_options = ["serverity", "location"]
     const [disasters, setDisasters] = useState(null);
     const leftSideBar = useRef({});
     const [selectedEvent, setSelectedEvent] = useState(null);
     //page count for infinit scroll
-    
+
     useEffect(() => {
         const fetch_process = async () => {
             const response = await fetchAllDisaster();
@@ -28,6 +28,7 @@ export default function MonitorDisasters() {
     }, []);
 
     const viewHandler = (data) => {
+        console.log("clicked", data);
         setSelectedEvent(data);
     }
 
@@ -38,7 +39,7 @@ export default function MonitorDisasters() {
             <SearchBar
                 filter_options={filter_options}
                 dropDownMaxHeight={120}
-                secondaryHeight={160}
+                secondaryHeight={90}
                 secondary_filter_options={secondary_options}
             />
 
@@ -62,13 +63,20 @@ export default function MonitorDisasters() {
                                     <div className="resource-scroll-list disaster-scroll-list">
                                         { /* Scroll list of disaster cards*/
                                             disasters?.length > 0 && disasters.map((d, i) =>
-                                                <DisasterCard key={`disaster-${d.type}-${i}`} data_object={d} viewHandler={() => { viewHandler(d); }} />)}
+                                                <DisasterCard key={`disaster-${d.type}-${i}`} data_object={d} viewHandler={viewHandler} />)}
                                     </div>
                                 </div>
                             </div>
 
                             {/*Map component*/
-                                selectedEvent && <BasicMap centerPoint={[selectedEvent.lat, selectedEvent.lon]} points={disasters} onMapClick={() => { }} isEditing={false} />
+                                selectedEvent && <BasicMap
+                                    centerPoint={
+                                        selectedEvent.latitude && selectedEvent.longitude ?
+                                            [selectedEvent.latitude, selectedEvent.longitude] : null
+                                    }
+                                    points={disasters}
+                                    onMapClick={() => { }}
+                                    isEditing={false} />
                             }
                         </div>
                     </AnimateInView>

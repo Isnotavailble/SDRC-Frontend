@@ -15,9 +15,9 @@ export default function ResourceCard({ viewHandler, data_object, onEdit, onDelet
     };
 
     const cardColor = getColor();
-
+    const role = JSON.parse(localStorage.getItem("user")).role;
     return (
-        <div className={`resource-card-container`}>
+        <div className={`resource-card-container`} >
             <div className="resource-status" style={{
                 borderColor: cardColor,
                 color: cardColor,
@@ -30,7 +30,7 @@ export default function ResourceCard({ viewHandler, data_object, onEdit, onDelet
                 {resource_type === "supplies" && <Container className="resource-icon" />}
                 <h3>{resource_type}</h3>
             </div>
-            
+
 
             <p className="resource-text">{resource_name}</p>
             <div className="line"></div>
@@ -44,11 +44,14 @@ export default function ResourceCard({ viewHandler, data_object, onEdit, onDelet
 
 
 
-            <div className="resource-card-buttons">
-                <button onClick={viewHandler}>view</button>
-                <button onClick={onEdit}>update</button>
-                <button onClick={() => onDelete(data_object)}>delete</button>
-            </div>
+            {role === "responder" &&
+
+                <div className="resource-card-buttons">
+                    <button onClick={viewHandler}>view</button>
+                    <button onClick={onEdit}>update</button>
+                    <button onClick={() => onDelete(data_object)}>delete</button>
+                </div>
+            }
         </div>
     );
 }

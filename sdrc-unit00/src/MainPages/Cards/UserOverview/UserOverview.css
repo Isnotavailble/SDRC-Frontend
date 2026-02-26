@@ -1,0 +1,42 @@
+.overview-card-container {
+    position: relative;
+    background-color: white;
+    width: 220px;
+    padding: 14px;
+    box-shadow: 0px 0px 5px var(--card-shadow, "gray");
+    height: fit-content;
+    border-radius: 15px;
+    min-height: 120px;
+
+}
+
+.overview-card-container .status-text {
+    border-radius: 10px;
+    font-size: 16px;
+    text-transform: capitalize;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    color: var(--dark-blue, "blue");
+}
+
+.overview-card-container .icon-row {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+.overview-card-container .icon-row p {
+    margin-left: 3px;
+}
+
+.overview-icon {
+    width: 36px;
+    height: 36px;
+    color: var(--orange-color, "orange");
+}
+
+.status-displayed-text {
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    color: var(--dark-blue);
+}

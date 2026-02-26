@@ -19,8 +19,6 @@ export default function DisasterCard({ viewHandler, data_object }) {
             <div className="disaster-severity-badge" style={{ borderColor: color(), color: color(), boxShadow: "0px 0px 3px " + color() }}>
                 {severity}
             </div>
-            <p>{time}</p>
-
             <div className="disaster-type-row">
                 {type.toLowerCase() === "earthquake" && <Activity className="disaster-icon" />}
                 {type.toLowerCase() === "storm" && <Wind className="disaster-icon" />}
@@ -35,7 +33,7 @@ export default function DisasterCard({ viewHandler, data_object }) {
             </div>
 
             <div className="disaster-card-buttons">
-                <button onClick={() => { viewHandler && viewHandler(); }}>view</button>
+                <button onClick={() => { viewHandler && viewHandler(data_object); }}>view</button>
             </div>
         </div>
     );

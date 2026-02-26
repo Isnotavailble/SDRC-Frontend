@@ -40,7 +40,7 @@ function BasicMap({ centerPoint, points, onMapClick ,isEditing }) {
                 points.map((p, i) =>
                     <Marker key={i} position={[p.latitude, p.longitude]}>
                         <Popup>
-                            {p.resource_name}
+                            {p.resource_name || p.severityValue}
                         </Popup>
                     </Marker>)
             }

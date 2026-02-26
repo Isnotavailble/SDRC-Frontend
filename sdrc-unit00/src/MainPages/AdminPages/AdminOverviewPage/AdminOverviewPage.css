@@ -1,0 +1,21 @@
+.overview-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    gap: 12px;
+}
+
+.overview-page-container {
+    position: relative;
+    min-height: 500px;
+    padding: 20px;
+    margin-top: 120px;
+    background-color: #f8f8f8;
+    box-shadow: 0px 0px 5px var(--card-shadow, "gray");
+    border-radius: 25px;
+}
+
+.overview-page-container h1 {
+    font-size: 24px;
+    color: var(--dark-blue, "blue");
+}

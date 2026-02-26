@@ -23,7 +23,7 @@ export default function ResponderRequestCard({ data_object, onApproved }) {
             }}>
                 {status}
             </div>
-            <p className="time-label">{time}</p>
+            <p className="time-label" style={{right : "1px"}}>{time}</p>
 
             <p>responder's name</p>
             <h3>{name || "Unknown"}</h3>

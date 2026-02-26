@@ -166,94 +166,104 @@ export default function MonitorResources() {
         console.log("data to be deleted", data_object)
         deleteResource({ data: data_object, setResources });
     }
+    const role = JSON.parse(localStorage.getItem("user")).role;
     return (
         <div className="monitor-resource-container">
             <h1>Monitor Resources</h1>
             <div className="line"></div>
             <SearchBar filter_options={filter_options} dropDownMaxHeight={120} secondaryHeight={121} secondary_filter_options={secondary_filter_options} />
-            <button className={`add-button layout-button ${mode === modeList[0] && "clicked-mode-button"}`} onClick={() => setMode(modeList[0])}>Default Layout</button>
-            <button className={`add-button layout-button ${mode === modeList[1] && "clicked-mode-button"}`} onClick={() => setMode(modeList[1])}>Map Layout</button>
-            <button className={`add-button ${mode === modeList[1] && editingCardId === "add-card" && "clicked-mode-button"}`} onClick={() => handleAddResource()}>Add a resource</button>
+            {role === "responder" &&
+                <>
+                    <button className={`add-button layout-button ${mode === modeList[0] && "clicked-mode-button"}`} onClick={() => setMode(modeList[0])}>Default Layout</button>
+                    <button className={`add-button layout-button ${mode === modeList[1] && "clicked-mode-button"}`} onClick={() => setMode(modeList[1])}>Map Layout</button>
+                    <button className={`add-button ${mode === modeList[1] && editingCardId === "add-card" && "clicked-mode-button"}`} onClick={() => handleAddResource()}>Add a resource</button>
 
+                </>
+            }
 
             {/* normal layout without map only cards*/}
-            {mode === modeList[0] && resources ?
-                <div className="resouces-flex-layout">
-                    {/*data list*/
-                        resources.length > 0 ?
-                            resources.map((r, i) => (
-                                <AnimateInView key={"card-1-" + i} delay={(i % 3) * 0.15}>
-                                    <ResourceCardWrapper
-                                        key={`card-1-${i}`}
-                                        data_object={r}
-                                        onDelete={handleDeleteResource}
-                                        onView={handleView}
-                                        isEditing={editingCardId === `card-1-${i}`}
-                                        selectedGeoPoint={selectedPoint}
-                                        onEdit={handleUpdate}
-                                        card_id={`card-1-${i}`} />
-                                </AnimateInView>
-
-                            )) :
-                            <AnimateInView>
-                                <p style={{ color: "gray", marginTop: "60px", fontSize: "15px" }}>You currently have no data for resources</p>
-                            </AnimateInView>
-
-
-                    }
-                </div> : null
-            }
-            {/*map layout (Old school)*/}
-            {mode === modeList[1] ?
-                <AnimateInView>
-
-                    <div className="resource-map-layout">
-
-                        <div className="resource-map-left" ref={el => { if (el) leftSideBar.current["left_side_bar"] = el }}>
-                            <button className="close-side-bar-btn" ref={el => { if (el) leftSideBar.current["close-btn"] = el }} onClick={() => { closeBtnHandler(leftSideBar); }}>
-                                <ArrowLeft className="close-side-bar-icon" ref={el => { if (el) leftSideBar.current["close-icon"] = el }} />
-                            </button>
-                            <div ref={el => { if (el) leftSideBar.current["hiding_place"] = el }} style={{ transition: "ease all 0.5s" }}>
-                                <h2>Resource Areas</h2>
-                                <div className="resource-scroll-list">
-                                    {/*add a resource card this will only appear if user click ADD button */
-                                        editingCardId === "add-card" &&
-                                        <ResourceEditCard onCancle={handleCancel} onComfirn={handleConfirmAdd} openAddOption={true} selectedGeoPoint={selectedPoint} />
-                                    }
-                                    {resources.length > 0 && resources.map((r, i) =>
-
+            {
+                mode === modeList[0] && resources ?
+                    <div className="resouces-flex-layout">
+                        {/*data list*/
+                            resources.length > 0 ?
+                                resources.map((r, i) => (
+                                    <AnimateInView key={"card-1-" + i} delay={(i % 3) * 0.15}>
                                         <ResourceCardWrapper
-                                            data_object={r}
-                                            onCancel={handleCancel}
-                                            onDelete={handleDeleteResource}
-                                            onComfirn={handleConfirmUpdate}
                                             key={`card-1-${i}`}
-                                            selectedGeoPoint={selectedPoint}
+                                            data_object={r}
+                                            onDelete={handleDeleteResource}
                                             onView={handleView}
                                             isEditing={editingCardId === `card-1-${i}`}
+                                            selectedGeoPoint={selectedPoint}
                                             onEdit={handleUpdate}
                                             card_id={`card-1-${i}`} />
-                                    )}
+                                    </AnimateInView>
+
+                                )) :
+                                <AnimateInView>
+                                    <p style={{ color: "gray", marginTop: "60px", fontSize: "15px" }}>You currently have no data for resources</p>
+                                </AnimateInView>
+
+
+                        }
+                    </div> : null
+            }
+            {/*map layout (Old school)*/}
+            {
+                mode === modeList[1] ?
+                    <AnimateInView>
+
+                        <div className="resource-map-layout">
+
+                            <div className="resource-map-left" ref={el => { if (el) leftSideBar.current["left_side_bar"] = el }}>
+                                <button className="close-side-bar-btn" ref={el => { if (el) leftSideBar.current["close-btn"] = el }} onClick={() => { closeBtnHandler(leftSideBar); }}>
+                                    <ArrowLeft className="close-side-bar-icon" ref={el => { if (el) leftSideBar.current["close-icon"] = el }} />
+                                </button>
+                                <div ref={el => { if (el) leftSideBar.current["hiding_place"] = el }} style={{ transition: "ease all 0.5s" }}>
+                                    <h2>Resource Areas</h2>
+                                    <div className="resource-scroll-list">
+                                        {/*add a resource card this will only appear if user click ADD button */
+                                            editingCardId === "add-card" &&
+                                            <ResourceEditCard onCancle={handleCancel} onComfirn={handleConfirmAdd} openAddOption={true} selectedGeoPoint={selectedPoint} />
+                                        }
+                                        {resources.length > 0 && resources.map((r, i) =>
+
+                                            <ResourceCardWrapper
+                                                data_object={r}
+                                                onCancel={handleCancel}
+                                                onDelete={handleDeleteResource}
+                                                onComfirn={handleConfirmUpdate}
+                                                key={`card-1-${i}`}
+                                                selectedGeoPoint={selectedPoint}
+                                                onView={handleView}
+                                                isEditing={editingCardId === `card-1-${i}`}
+                                                onEdit={handleUpdate}
+                                                card_id={`card-1-${i}`} />
+                                        )}
+                                        {
+                                            resources.length < 1 && <p style={{ color: "gray", marginTop: "60px", fontSize: "15px" }}>You currently have no data for resources</p>
+                                        }
+                                    </div>
                                 </div>
+
                             </div>
+
+
+                            <BasicMap
+                                centerPoint={selectedPoint?.latitude && selectedPoint?.longitude ? [selectedPoint.latitude, selectedPoint.longitude] : null}
+                                points={resources}
+                                onMapClick={handleMapClick}
+                                isEditing={editingCardId !== null}
+                            />
+
 
                         </div>
 
-
-                        <BasicMap
-                            centerPoint={selectedPoint && [selectedPoint.latitude, selectedPoint.longitude]}
-                            points={resources}
-                            onMapClick={handleMapClick}
-                            isEditing={editingCardId !== null}
-                        />
-
-
-                    </div>
-
-                </AnimateInView>
-                :
-                null
+                    </AnimateInView>
+                    :
+                    null
             }
-        </div>
+        </div >
     )
 }

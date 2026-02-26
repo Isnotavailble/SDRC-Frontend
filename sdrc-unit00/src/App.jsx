@@ -12,6 +12,7 @@ import AdminApprovalPage from './MainPages/AdminPages/AdminApprovalPage/AdminApp
 import AdminDisasterPage from './MainPages/AdminPages/AdminMonitorDisasterPage/AdminDisasterPage';
 import AdminSendAlert from './MainPages/AdminPages/AdminSendAlertPage/AdminSendAlert';
 import AdminLayout from './layout/AdminLayout/AdminLayout';
+import AdminMonitorResource from './MainPages/AdminPages/AdminMonitorResourcePage/AdminMonitorResource';
 
 function App() {
   const { user } = useAuthContext();
@@ -48,6 +49,7 @@ function App() {
           <Route path='responders' element={<AdminApprovalPage />} />
           <Route path='disasters' element={<AdminDisasterPage />} />
           <Route path='alerts' element={<AdminSendAlert />} />
+          <Route path='resources' element={<AdminMonitorResource />} />
         </Route>
 
       </Routes>
