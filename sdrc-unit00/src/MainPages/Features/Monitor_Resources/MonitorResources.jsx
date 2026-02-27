@@ -8,6 +8,7 @@ import { ArrowLeft } from "lucide-react";
 import ResourceEditCard from "../../Cards/ResourceEditCard/ResourceEditCard";
 import ResourceCardWrapper from "../Wrappers/ResourceCardWrapper";
 import { addResource, deleteResource, fetchAllResources, updateResource } from "../../../Util/fetchReources";
+import axios from "axios";
 /*
 Layout summary : 
 
@@ -77,6 +78,23 @@ export default function MonitorResources() {
     useEffect(() => {
         fetchAllResources({ setLoading, setError, setResources });
     }, []);
+    const filterBtnHandler = async (option) => {
+        const token = localStorage.getItem("user_token");
+        if (option.toLowerCase() === "default") {
+            fetchAllResources({ setLoading, setResources, setrror : setError });
+        }
+        else if (option.toLowerCase() === "shelter" || option.toLowerCase() === "supplies" || option.toLowerCase() === "hospital") {
+            const res = await axios.get("http://localhost:8080/api/v1/resources",
+                {
+                    headers:
+                        { Authorization: `Bearer ${token}` }
+                }
+            );
+            console.log("filtered : ", option.toLowerCase());
+            const filtered_data = res.data.data.filter(item => item.resource_type === option.toLowerCase());
+            setResources(filtered_data);
+        }
+    }
 
     useEffect(() => {
         //scroll logic        
@@ -171,7 +189,11 @@ export default function MonitorResources() {
         <div className="monitor-resource-container">
             <h1>Monitor Resources</h1>
             <div className="line"></div>
-            <SearchBar filter_options={filter_options} dropDownMaxHeight={120} secondaryHeight={121} secondary_filter_options={secondary_filter_options} />
+            <SearchBar
+                filter_options={filter_options} dropDownMaxHeight={120}
+                secondaryHeight={121}
+                needSearch={false}
+                secondary_filter_options={secondary_filter_options} filter_handler={filterBtnHandler} />
             {role === "responder" &&
                 <>
                     <button className={`add-button layout-button ${mode === modeList[0] && "clicked-mode-button"}`} onClick={() => setMode(modeList[0])}>Default Layout</button>

@@ -21,14 +21,14 @@ function DynamicCenter({ centerPoint }) {
     return null; // This component doesn't render any HTML
 }
 
-function BasicMap({ centerPoint, points, onMapClick ,isEditing }) {
+function BasicMap({ centerPoint, points, onMapClick, isEditing }) {
     const [selectedPoint, setSelectedPoint] = useState(null);
     useEffect(() => {
         console.log("map center at", centerPoint);
     }, [centerPoint]);
 
     return (
-        <MapContainer center={centerPoint || [16.8980,96.1311]} zoom={13} scrollWheelZoom={true} className='basic-map-container'>
+        <MapContainer center={centerPoint || [16.8980, 96.1311]} zoom={13} scrollWheelZoom={true} className='basic-map-container'>
             <MapResizer />
             <DynamicCenter centerPoint={centerPoint} />
             {isEditing && <MapClickEventHandler onMapClick={onMapClick} setSelectedPoint={setSelectedPoint} />}
@@ -39,8 +39,10 @@ function BasicMap({ centerPoint, points, onMapClick ,isEditing }) {
             {points?.length > 0 &&
                 points.map((p, i) =>
                     <Marker key={i} position={[p.latitude, p.longitude]}>
-                        <Popup>
-                            {p.resource_name || p.severityValue}
+                        <Popup >
+                            
+                            <b style={{fontWeight : "800",textAlign : "center"}}>{p.location || "Unknown"}</b>
+                            <p style={{marginTop : "10px",textAlign : "center"}}>{p.resource_name || p.severityValue}</p>
                         </Popup>
                     </Marker>)
             }

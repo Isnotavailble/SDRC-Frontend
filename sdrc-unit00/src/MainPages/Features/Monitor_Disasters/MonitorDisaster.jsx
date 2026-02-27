@@ -8,6 +8,7 @@ import { closeBtnHandler } from "../Monitor_Resources/MonitorResources";
 import { ArrowLeft } from "lucide-react";
 import BasicMap from "../../../Map/BasicMap";
 import AnimateInView from "../../../Animations/AnimateInView";
+import axios from "axios";
 
 export default function MonitorDisasters() {
 
@@ -25,8 +26,34 @@ export default function MonitorDisasters() {
             setSelectedEvent(response[0]);
         }
         fetch_process();
+        const d = async () => {
+            const res = await axios.get("http://localhost:8080/api/v1/incidents/filter?start_date=2026-02-01&end_date=2026-02-18&page=1&page_size=5"
+
+                , { headers: { Authorization: `Bear ${localStorage.getItem("user_token")}` } }
+            )
+            console.log("incident :", res.data);
+        }
+        d();
     }, []);
 
+    useEffect(() => {
+        if (disasters)
+            setSelectedEvent(disasters[0]);
+    }, [disasters])
+
+    const filterBtn_handler = async (option) => {
+        const o = option.toLowerCase();
+        if (o === "default") {
+            const data = await fetchAllDisaster();
+            setDisasters(data);
+        }
+        else if (o === "low" || o === 'medium' || o === "high") {
+            const data = await fetchAllDisaster();
+            const filter_data = data.filter(d => d.severity.toLowerCase() === o);
+            setDisasters(filter_data);
+            console.log("filter", filter_data);
+        }
+    }
     const viewHandler = (data) => {
         console.log("clicked", data);
         setSelectedEvent(data);
@@ -40,6 +67,7 @@ export default function MonitorDisasters() {
                 filter_options={filter_options}
                 dropDownMaxHeight={120}
                 secondaryHeight={90}
+                filter_handler={filterBtn_handler}
                 secondary_filter_options={secondary_options}
             />
 
@@ -81,6 +109,7 @@ export default function MonitorDisasters() {
                         </div>
                     </AnimateInView>
                 }
+                {disasters?.length < 1 && <p style={{ color: "gray", position: "absolute", left: "150px", top: "220px" }}> No Data Available</p>}
             </MapLayoutStyleWrapper>
 
         </div>

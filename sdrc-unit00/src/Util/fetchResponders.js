@@ -34,7 +34,7 @@ export async function getAllResponders({ setError, setLoading, setResponders }) 
             "phone": r.phone_number,
             "region": getRegions().find(region => region.region_id === r.region_id).region,
             "status": r.is_approved ? "Approved" : "Pending",
-            "registered_date" : new Date(r.created_at).getDate(),
+            "registered_date" : r.created_at,
             "time": timeAgo(r.created_at),
         }));
 

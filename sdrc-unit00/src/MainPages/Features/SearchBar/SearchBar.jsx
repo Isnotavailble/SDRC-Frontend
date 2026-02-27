@@ -9,7 +9,7 @@ Note : I use search icon in line styling ..
 export default function SearchBar({ filter_options,
     dropDownMaxHeight,
     secondary_filter_options,
-    secondaryHeight,handlers }) {
+    secondaryHeight, needSearch, filter_handler }) {
     const drop = useRef({});
     const dropMode = ["by parents", "by fields"]
     const [selectedType, setSelectedType] = useState(null);
@@ -56,38 +56,41 @@ export default function SearchBar({ filter_options,
     return (
         <div className="searchbar-container">
             {/*search bar div*/}
-            <div className="searchbar-box">
-                <Search className="searchbar-icon" strokeWidth={2} color="#807e7e" size={20} />
-                <input placeholder="search resource by..." type="text" autoCorrect="" />
-                <button className="filter-button" onClick={() => { dropDownHandler("filter_drop", "type") }}>{selectedType || "Filter"}</button>
+            {needSearch &&
+                <div className="searchbar-box">
 
-                <div className="filter-drop-box">
-                    <div className="filter-dropdown" ref={el => { if (el) drop.current["filter_drop"] = el }}>
 
-                        {dropDownMode === dropMode[0] &&
-                            filter_options.slice(1).map((o, i) =>
-                                <button key={"type-" + i} onClick={() => dropDownHandler("filter_drop", secondary_filter_options?.length > 0 ? "parent" : "child", o)}>
-                                    {o}
-                                </button>)
-                        }
+                    <Search className="searchbar-icon" strokeWidth={2} color="#807e7e" size={20} />
+                    <input placeholder="search resource by..." type="text" autoCorrect="" />
+                    <button className="filter-button" onClick={() => { dropDownHandler("filter_drop", "type") }}>{selectedType || "Filter"}</button>
 
-                        {dropDownMode === dropMode[1] &&
-                            secondary_filter_options.map((o, i) =>
-                                <button key={"field-" + i} onClick={() => dropDownHandler("filter_drop", "child", o)}>
-                                    {o}
-                                </button>)
-                        }
+                    <div className="filter-drop-box">
+                        <div className="filter-dropdown" ref={el => { if (el) drop.current["filter_drop"] = el }}>
+
+                            {dropDownMode === dropMode[0] &&
+                                filter_options.slice(1).map((o, i) =>
+                                    <button key={"type-" + i} onClick={() => dropDownHandler("filter_drop", secondary_filter_options?.length > 0 ? "parent" : "child", o)}>
+                                        {o}
+                                    </button>)
+                            }
+
+                            {dropDownMode === dropMode[1] &&
+                                secondary_filter_options.map((o, i) =>
+                                    <button key={"field-" + i} onClick={() => dropDownHandler("filter_drop", "child", o)}>
+                                        {o}
+                                    </button>)
+                            }
+                        </div>
                     </div>
-                </div>
 
-                <button className="search-btn">Search</button>
-            </div>
+                    <button className="search-btn">Search</button>
+                </div>}
             {/*filter button list*/}
 
-            <div className="filter-buttons">
+            <div className="filter-buttons" style={{marginLeft : needSearch ? "20px" : "0px"}}>
                 {
                     filter_options && filter_options.map((b, i) =>
-                        <button key={i} >{b}</button>
+                        <button key={i} onClick={() => { filter_handler(b) }} >{b}</button>
                     )
                 }
             </div>

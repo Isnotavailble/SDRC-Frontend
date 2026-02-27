@@ -10,22 +10,42 @@ import MapLayoutStyleWrapper from "../../Features/Monitor_Resources/MapLayoutSty
 import { closeBtnHandler } from "../../Features/Monitor_Resources/MonitorResources";
 import { fetchAllDisaster } from "../../../Util/fetchDisaster";
 import { ArrowLeft } from "lucide-react";
+import axios from "axios";
 
 
 //the copied pasted code from feature compno
 export default function AdminOverviewPage() {
     const leftSideBar = useRef({});
     const [disasters, setDisasters] = useState(null);
+    const [totalResources, setTotalResources] = useState(null);
+    const [pendingAccCount, setPendingAccCount] = useState(null);
+    const [approvedAccCount, setApprovedAccCount] = useState(null);
     const [selectedEvent, setSelectedEvent] = useState(null);
     //page count for infinit scroll
 
     useEffect(() => {
+        const token = localStorage.getItem("user_token");
         const fetch_process = async () => {
             const response = await fetchAllDisaster();
             setDisasters(response);
             setSelectedEvent(response[0]);
         }
+        const get_resounces = async () => {
+            const { data } = await axios.get("http://localhost:8080/api/v1/resources", { headers: { Authorization: `Bearer ${token}` } });
+            setTotalResources(data.data.length);
+        }
+        const get_acc_count = async () => {
+            const { data } = await axios.get("http://localhost:8080/api/v1/users/responders", { headers: { Authorization: `Bearer ${token}` } });
+            const accList = data.data.items;
+            const pending_count = accList.filter(acc => acc.is_approved === false)?.length;
+            const approved_count = accList.filter(acc => acc.is_approved === true)?.length;
+            console.log("count", data);
+            setApprovedAccCount(approved_count || 0);
+            setPendingAccCount(pending_count || 0);
+        }
+        get_resounces();
         fetch_process();
+        get_acc_count();
     }, []);
 
     const viewHandler = (data) => {
@@ -33,15 +53,17 @@ export default function AdminOverviewPage() {
         setSelectedEvent(data);
     }
 
+
+
     return (
         <div className="overview-page-container">
             <h1>Admin Overview Page</h1>
             <div className="line"></div>
             <div className="overview-row">
-                <UserOverviewCard status="pending" users_count={10} />
-                <UserOverviewCard status="approved" users_count={12} />
-                <ResourceOverviewCard resource_count={10} />
-                <DisasterOverviewCard disaster_count={23} />
+                <UserOverviewCard status="pending" users_count={pendingAccCount} />
+                <UserOverviewCard status="approved" users_count={approvedAccCount} />
+                <ResourceOverviewCard resource_count={totalResources || 0} />
+                <DisasterOverviewCard disaster_count={disasters?.length || 0} />
             </div>
 
             <MapLayoutStyleWrapper>
@@ -51,9 +73,9 @@ export default function AdminOverviewPage() {
                         <div className="resource-map-layout disaster-map-layout">
 
                             {/* The left side bar*/}
-                            <div className="resource-map-left disaster-map-left"  ref={el => { if (el) leftSideBar.current["left_side_bar"] = el }}>
+                            <div className="resource-map-left disaster-map-left" ref={el => { if (el) leftSideBar.current["left_side_bar"] = el }}>
 
-                                <button className="close-side-bar-btn" style={{marginLeft : "100px"}} ref={el => { if (el) leftSideBar.current["close-btn"] = el }} onClick={() => { closeBtnHandler(leftSideBar); }}>
+                                <button className="close-side-bar-btn" style={{ marginLeft: "100px" }} ref={el => { if (el) leftSideBar.current["close-btn"] = el }} onClick={() => { closeBtnHandler(leftSideBar); }}>
                                     <ArrowLeft className="close-side-bar-icon" ref={el => { if (el) leftSideBar.current["close-icon"] = el }} />
                                 </button>
 
