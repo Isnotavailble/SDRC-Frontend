@@ -20,11 +20,28 @@ function App() {
   const isLogin = localStorage.getItem("user_token") ? true : false;
   const current_user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null;
 
-  useEffect(() => { console.log("user at ", l.pathname), [l.pathname] });
+  useEffect(() => {
+    console.log("user at ", l.pathname),
+      [l.pathname]
+  });
 
   return (
     <>
       <Routes>
+
+        {/* Root Route: Redirects based on login status and role */}
+        <Route path="/" element={
+          !isLogin ? (
+            <Navigate to="/login" replace />
+          ) : current_user?.role === "admin" ? (
+            <Navigate to="/admin/overview" replace />
+          ) : current_user?.role === "responder" ? (
+            <Navigate to="/responder/home" replace />
+          ) : (
+            <Navigate to="/login" replace /> // Safety fallback
+          )
+        } />
+
         {/*Auth process*/}
         <Route element={<AuthLayout />}>
           <Route path='login' element={<LoginPage />} />
@@ -52,8 +69,9 @@ function App() {
           <Route path='resources' element={<AdminMonitorResource />} />
         </Route>
 
+        {/* Fallback handler: Catches unknown URLs and sends them to the Root logic above */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-
     </>
   )
 }

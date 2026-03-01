@@ -49,9 +49,13 @@ export default function ResponderMainPage() {
                     </div>
                 </> :
                 <div className="waiting-container">
-                    <Timer/>
-                    <div className="line"></div>
-                    <p>Hold tight. The user is updating their information to ensure an accurate response.</p>
+                    <div className="waiting-card-container">
+                        <Timer className="waiting-card-icon" />
+                        <div className="line waiting-card-line"></div>
+                        <b>Requesting </b>
+                        <p>We are reviewing your profile. Feel free to leave this page and come back later.</p>
+                    </div>
+
                 </div>
             }
         </div>

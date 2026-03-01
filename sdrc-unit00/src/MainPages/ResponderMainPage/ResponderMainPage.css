@@ -31,14 +31,16 @@
 
     border: solid var(--main-card-color) 1px;
     color: var(--dark-blue, "blue");
-    background-color:rgb(231, 231, 233);
+    background-color: rgb(231, 231, 233);
     transition: ease all 0.3s;
 }
-.responder-features-row button:hover{
-    width : 70px;
+
+.responder-features-row button:hover {
+    width: 70px;
     box-shadow: 0px 0px 9px var(--card-shadow);
 }
-.responder-features-row button:active{
+
+.responder-features-row button:active {
     background-color: rgb(238, 238, 238);
 }
 
@@ -50,12 +52,107 @@
 .responder-main-page-icon {
     position: relative;
     top: 5px;
-    width:25px;
+    width: 25px;
     height: 25px;
     color: var(--dark-blue);
     stroke-width: 1.1px;
 
 }
+
 .responder-feature-container {
     margin-top: 2px;
+}
+
+
+/*Card*/
+.waiting-container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.waiting-container .waiting-card-container {
+    position: relative;
+    top:-30px;
+    background-color: white;
+    box-shadow: 0px 0px 5px var(--card-shadow, "gray");
+    padding: 20px;
+    width: 360px;
+    border-radius: 20px;
+    /*animation: gentleFloat 3s ease-in-out infinite;*/
+}
+
+.waiting-container .waiting-card-container .waiting-card-icon {
+    color: var(--orange-color, "orange");
+    width: 38px;
+    height: 38px;
+    stroke-width: 1.9px;
+}
+
+.waiting-container .waiting-card-container .waiting-card-line {
+    width: 40px;
+}
+
+.waiting-card-container b {
+    font-size: 24px;
+    color: var(--dark-blue, "blue");
+}
+
+.waiting-card-container b::after {
+    content: "";
+    /* Starts empty */
+    animation: loadingDots 1.5s infinite step-end;
+    /* Loops forever */
+
+    /* These three lines keep the card layout from jumping around as dots are added */
+    display: inline-block;
+    width: 24px;
+    text-align: left;
+}
+
+.waiting-card-container p {
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 360;
+    color: rgb(85, 84, 84);
+}
+
+/*
+@keyframes gentleFloat {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}*/
+/*Requesting animation for text "..." -> ".." -> "."*/
+@keyframes loadingDots {
+    0% {
+        content: "";
+    }
+
+    25% {
+        content: ".";
+    }
+
+    50% {
+        content: "..";
+    }
+
+    75% {
+        content: "...";
+    }
+
+    100% {
+        content: "";
+    }
 }

@@ -12,9 +12,12 @@ function DynamicCenter({ centerPoint }) {
 
     useEffect(() => {
         if (centerPoint) {
+
             // map.setView instantly jumps to the new center
-            // map.flyTo(centerPoint) is another option if you want a smooth animation!
+            //map.flyTo(centerPoint) //is another option if you want a smooth animation!
             map.setView(centerPoint, map.getZoom());
+            map.closePopup();
+
         }
     }, [centerPoint, map]);
 
@@ -39,10 +42,22 @@ function BasicMap({ centerPoint, points, onMapClick, isEditing }) {
             {points?.length > 0 &&
                 points.map((p, i) =>
                     <Marker key={i} position={[p.latitude, p.longitude]}>
-                        <Popup >
-                            
-                            <b style={{fontWeight : "800",textAlign : "center"}}>{p.location || "Unknown"}</b>
-                            <p style={{marginTop : "10px",textAlign : "center"}}>{p.resource_name || p.severityValue}</p>
+                        <Popup>
+                            <div style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                textAlign: "center",
+                                minWidth: "120px" /* Ensures it's wide enough to visibly center */
+                            }}>
+                                <b style={{ fontWeight: "800" }}>
+                                    {p.location || p.resource_name}
+                                </b>
+                                <p style={{ marginTop: "5px", marginBottom: "0px" }}>
+                                    {p.severityValue || `${p.latitude} , ${p.longitude} `}
+                                </p>
+                            </div>
                         </Popup>
                     </Marker>)
             }
