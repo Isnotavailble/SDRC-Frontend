@@ -2,211 +2,71 @@ import axios from "axios";
 
 export async function fetchAllDisaster() {
 
-    const disaster = [
-        {
-            "id": 1,
-            "type": "Earthquake",
-            "severity": "high",
-            "severityValue": "7.2 magnitude",
-            "happened_at": "2023-11-12 14:30",
-            "location": "Taungoo, Bago Region",
-            "latitude": 18.9433,
-            "longitude": 96.4326
-        },
-        {
-            "id": 2,
-            "type": "Earthquake",
-            "severity": "low",
-            "severityValue": "3.1 magnitude",
-            "happened_at": "2023-11-14 22:10",
-            "location": "Mandalay City",
-            "latitude": 21.9588,
-            "longitude": 96.0891
-        },
-        {
-            "id": 3,
-            "type": "Earthquake",
-            "severity": "high",
-            "severityValue": "6.2 magnitude",
-            "happened_at": "2023-11-15 06:45",
-            "location": "Bago City",
-            "latitude": 17.3333,
-            "longitude": 96.4833
-        },
-        {
-            "id": 4,
-            "type": "Earthquake",
-            "severity": "medium",
-            "severityValue": "5.5 magnitude",
-            "happened_at": "2023-10-22 03:15",
-            "location": "Sagaing City",
-            "latitude": 21.8787,
-            "longitude": 95.9760
-        },
-        {
-            "id": 5,
-            "type": "Earthquake",
-            "severity": "low",
-            "severityValue": "3.8 magnitude",
-            "happened_at": "2023-12-05 08:30",
-            "location": "Naypyidaw",
-            "latitude": 19.7450,
-            "longitude": 96.1297
-        },
-        {
-            "id": 6,
-            "type": "Earthquake",
-            "severity": "high",
-            "severityValue": "6.8 magnitude",
-            "happened_at": "2023-11-20 20:45",
-            "location": "Kengtung, Shan State",
-            "latitude": 21.2913,
-            "longitude": 99.6048
-        },
-        {
-            "id": 7,
-            "type": "Earthquake",
-            "severity": "low",
-            "severityValue": "2.9 magnitude",
-            "happened_at": "2023-12-10 01:10",
-            "location": "Myitkyina, Kachin State",
-            "latitude": 25.3833,
-            "longitude": 97.4000
-        },
-        {
-            "id": 8,
-            "type": "Earthquake",
-            "severity": "medium",
-            "severityValue": "4.8 magnitude",
-            "happened_at": "2023-09-18 10:15",
-            "location": "Pyin Oo Lwin",
-            "latitude": 22.0333,
-            "longitude": 96.4667
-        },
-        {
-            "id": 9,
-            "type": "Earthquake",
-            "severity": "low",
-            "severityValue": "3.5 magnitude",
-            "happened_at": "2023-11-25 23:55",
-            "location": "Magway City",
-            "latitude": 20.1500,
-            "longitude": 94.9167
-        },
-        {
-            "id": 10,
-            "type": "Earthquake",
-            "severity": "high",
-            "severityValue": "6.5 magnitude",
-            "happened_at": "2023-08-14 18:20",
-            "location": "Thabeikkyin, Mandalay Region",
-            "latitude": 22.8833,
-            "longitude": 95.9833
-        },
-        {
-            "id": 11,
-            "type": "Earthquake",
-            "severity": "medium",
-            "severityValue": "5.2 magnitude",
-            "happened_at": "2023-04-05 13:45",
-            "location": "Bagan, Mandalay Region",
-            "latitude": 21.1717,
-            "longitude": 94.8583
-        },
-        {
-            "id": 12,
-            "type": "Earthquake",
-            "severity": "low",
-            "severityValue": "3.2 magnitude",
-            "happened_at": "2023-09-02 15:20",
-            "location": "Hakha, Chin State",
-            "latitude": 22.6433,
-            "longitude": 93.6053
-        },
-        {
-            "id": 13,
-            "type": "Earthquake",
-            "severity": "medium",
-            "severityValue": "4.5 magnitude",
-            "happened_at": "2023-07-25 09:10",
-            "location": "Hinthada, Ayeyarwady Region",
-            "latitude": 17.6475,
-            "longitude": 95.4586
-        },
-        {
-            "id": 14,
-            "type": "Earthquake",
-            "severity": "low",
-            "severityValue": "3.7 magnitude",
-            "happened_at": "2023-03-12 14:00",
-            "location": "Dawei, Tanintharyi Region",
-            "latitude": 14.0828,
-            "longitude": 98.1940
-        },
-        {
-            "id": 15,
-            "type": "Earthquake",
-            "severity": "high",
-            "severityValue": "6.1 magnitude",
-            "happened_at": "2023-06-30 22:45",
-            "location": "Shwebo, Sagaing Region",
-            "latitude": 22.5667,
-            "longitude": 95.7000
-        },
-        {
-            "id": 16,
-            "type": "Earthquake",
-            "severity": "medium",
-            "severityValue": "5.0 magnitude",
-            "happened_at": "2023-01-18 11:30",
-            "location": "Tachileik, Shan State",
-            "latitude": 20.4465,
-            "longitude": 99.8773
-        },
-        {
-            "id": 17,
-            "type": "Earthquake",
-            "severity": "low",
-            "severityValue": "3.4 magnitude",
-            "happened_at": "2023-05-22 07:15",
-            "location": "Taunggyi, Shan State",
-            "latitude": 20.7833,
-            "longitude": 97.0333
-        },
-        {
-            "id": 18,
-            "type": "Earthquake",
-            "severity": "medium",
-            "severityValue": "4.9 magnitude",
-            "happened_at": "2023-10-08 16:50",
-            "location": "Bhamo, Kachin State",
-            "latitude": 24.2667,
-            "longitude": 97.2333
-        },
-        {
-            "id": 19,
-            "type": "Earthquake",
-            "severity": "low",
-            "severityValue": "3.9 magnitude",
-            "happened_at": "2023-02-14 04:20",
-            "location": "Meiktila, Mandalay Region",
-            "latitude": 20.8833,
-            "longitude": 95.8667
-        },
-        {
-            "id": 20,
-            "type": "Earthquake",
-            "severity": "medium",
-            "severityValue": "5.4 magnitude",
-            "happened_at": "2023-08-28 19:10",
-            "location": "Yangon City",
-            "latitude": 16.8409,
-            "longitude": 96.1735
+
+    try {
+        const page_count = 10;
+        const response_list_id = [];
+        let response_list = [];
+        for (let page = 1 ; page < 10 ; page++){
+
+
+        const res = await axios.get(`http://localhost:8080/api/v1/incidents?page=${page}&page_size=5`, {headers :{Authorization : `Bearer ${localStorage.getItem("user_token")}`}});
+        console.log("res", res);
+        if (res.data.data?.items?.length === 0)
+                break;
+            res.data.data.items.forEach((item) => {response_list_id.push(item.unified_event_id)});
         }
-    ];
+
+        for (let id in response_list_id){
+            const res = await axios.get(`http://localhost:8080/api/v1/incidents/${response_list_id[id]}`, {headers :{Authorization : `Bearer ${localStorage.getItem("user_token")}`}});
+            console.log("res detail", res.data.data.raw_reports);
+
+            response_list.push(res.data.data.raw_reports[0]);
+        }
+        /*
+
+        {
+    "raw_reports": [
+        {
+            "id": "e752d0c4-4ad9-4bf6-b922-4186447b5d8d",
+            "unified_event_id": "f3bbf3a9-eeae-4a5e-a8fc-b53d38d4ee4d",
+            "incident_type": "earthquake",
+            "severity": "low",
+            "source": "EMSC",
+            "external_id": "1952059",
+            "magnitude": 3.8,
+            "latitude": 18.114,
+            "longitude": 96.588,
+            "happened_at": "2026-02-27T11:50:52+06:30",
+            "is_forecast": false,
+            "extra_data": {},
+            "created_at": "2026-02-27T12:46:25.619991+06:30"
+        }
+    ],
+    "unified_event_id": "f3bbf3a9-eeae-4a5e-a8fc-b53d38d4ee4d"
+}
+
+        */
+       response_list = response_list.map(item => (
+        {"id": item.unified_event_id,
+            "type": item.incident_type,
+            "severity": item.severity,
+            "severityValue": item.magnitude ? `${item.magnitude} magnitude` : "Unknown",
+            "happened_at": new Date(item.happened_at).toDateString(),
+            "location": `${item.latitude}, ${item.longitude}`,
+            "latitude": item.latitude,
+            "longitude": item.longitude}));
+
+        console.log("response_list_id", response_list_id);
+        console.log("response_list", response_list);
+        return response_list;
+
+    }catch(error){
+        console.error("Error fetching disaster data:", error);
+    }
 
 
-    /*await new Promise(r => setTimeout(r, 100));*/
-    return disaster;
+
+    return null;
 
 }

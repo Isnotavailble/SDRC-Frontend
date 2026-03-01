@@ -49,6 +49,7 @@ export default function MonitorDisasters() {
         }
         else if (o === "low" || o === 'medium' || o === "high") {
             const data = await fetchAllDisaster();
+            console.log("b ", data);
             const filter_data = data.filter(d => d.severity.toLowerCase() === o);
             setDisasters(filter_data);
             console.log("filter", filter_data);
