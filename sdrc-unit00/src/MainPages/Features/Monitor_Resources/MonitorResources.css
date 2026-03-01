@@ -83,6 +83,7 @@
 .resource-map-layout .resource-map-left .resource-scroll-list {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap:10px;
     padding: 20px;
     max-height: 440px;
@@ -164,4 +165,7 @@
 /* 4. Darken the thumb when hovered for better UX */
 .resource-scroll-list::-webkit-scrollbar-thumb:hover {
     background-color: #64748b;
+}
+.error-ms {
+    color: gray;
 }

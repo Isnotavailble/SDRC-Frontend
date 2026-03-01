@@ -37,3 +37,18 @@ export function timeAgo(dateString) {
     const years = Math.floor(days / 365);
     return `${years} year${years === 1 ? '' : 's'} ago`;
 }
+
+// Function to get a start and end date formatted as YYYY-MM-DD
+export const getRecentDateRange = (daysAgo = 30) => {
+    const end = new Date(); // Today's date
+    const start = new Date();
+
+    // Subtract the number of days from today
+    start.setDate(end.getDate() - daysAgo);
+
+    // Format both as YYYY-MM-DD
+    const endDate = end.toLocaleDateString('en-CA');
+    const startDate = start.toLocaleDateString('en-CA');
+
+    return { startDate, endDate };
+};

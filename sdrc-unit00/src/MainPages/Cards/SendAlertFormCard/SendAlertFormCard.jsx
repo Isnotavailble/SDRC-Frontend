@@ -2,6 +2,7 @@ import { Send } from "lucide-react";
 import "./SendAlertFormCard.css";
 import { useState } from "react";
 import { getRegions } from "../../../Util/fetchPostalCode";
+import axios from "axios";
 
 export default function SendAlertFormCard() {
     // 1. Setup state for all form fields, with default values
@@ -32,10 +33,10 @@ export default function SendAlertFormCard() {
         }
 
         try {
-            // Convert local datetime to ISO 8601 UTC format (e.g., 2026-12-31T23:59:59Z)
+            // Convert local datetime to ISO 8601 UTC format
             const formattedDate = new Date(formData.expires_at).toISOString();
 
-            // Build the exact payload the API expects
+            // Build the payload
             const payload = {
                 incident_type: formData.incident_type,
                 severity: formData.severity,
@@ -45,27 +46,34 @@ export default function SendAlertFormCard() {
                 expires_at: formattedDate
             };
 
-            // Send the POST request
-            const response = await fetch("http://localhost:8080/api/v1/alerts", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${localStorage.getItem("user_token")}`
-                },
-                body: JSON.stringify(payload)
-            });
+            // Send the POST request using axios
+            const response = await axios.post(
+                "http://localhost:8080/api/v1/alerts",
+                payload,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${localStorage.getItem("user_token")}`
+                    }
+                }
+            );
 
-            if (response.ok) {
+            if (response.status === 200 || response.status === 201) {
                 alert("Alert sent successfully!");
+                console.log("alert", payload)
                 // Optional: Clear form here if needed
             } else {
-                const errorData = await response.json();
-                console.error("Server Error:", errorData);
+                console.error("Server Error:", response.data);
                 alert("Failed to send alert. Check console for details.");
             }
         } catch (error) {
-            console.error("Network Error:", error);
-            alert("Network error. Is your backend running?");
+            if (error.response) {
+                console.error("Server Error:", error.response.data);
+                alert("Failed to send alert. Check console for details.");
+            } else {
+                console.error("Network Error:", error);
+                alert("Network error. Is your backend running?");
+            }
         }
     };
 

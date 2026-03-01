@@ -9,7 +9,7 @@ export default function DisasterOverviewCard({ disaster_count = 0 }) {
                 <p className="status-text" >Today Total Incidents</p>
 
             </div>
-            <p className="status-displayed-text">{disaster_count} incidents happend tody.Please go to "disaster" page to view details</p>
+            <p className="status-displayed-text">{disaster_count} incidents happened today. Please go to the "disaster" page to view details.</p>
 
         </ div>);
 }

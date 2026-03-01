@@ -46,7 +46,7 @@ function RegisterPage() {
                                     regions.map(
                                         c => <option key={c.region_id} value={c.region_id}>{c.region}</option>
                                     ) :
-                                    <option value={""}>postal code</option>
+                                    <option value={""}>select a region</option>
                             }
                         </select>
                     </label>
@@ -67,7 +67,7 @@ function RegisterPage() {
 
                             <div style={{ display: "flex", flexDirection: "row", gap: "5px", marginTop: "10px" }}>
                                 <button type={"submit"}>Login</button>
-                                <button className="back-button" onClick={() => { redirectHandler(); }}>Back To Centre</button>
+                                <button className="back-button" onClick={() => { redirectHandler(); }}>Back To HomePage</button>
                             </div> :
 
                             <button type="submit">Register</button>}

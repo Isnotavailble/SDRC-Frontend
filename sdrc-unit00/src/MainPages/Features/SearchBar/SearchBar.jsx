@@ -15,7 +15,9 @@ export default function SearchBar({ filter_options,
     const [selectedType, setSelectedType] = useState(null);
     const [selectedField, setSelectedField] = useState(null)
     const [dropDownMode, setDropDownMode] = useState(dropMode[0]);
-
+    const [selectedDate, setSelectedDate] = useState({});
+    const [dateFilterOpened, setDateFilterOpened] = useState(false);
+    const [selectedFilter, setSelectedFilter] = useState(filter_options[0]);
     //drop down height handler
     function dropDownHandler(refKey, button, data) {
         // 1. Define 'el' up here so all the 'if' blocks can see it!
@@ -87,12 +89,31 @@ export default function SearchBar({ filter_options,
                 </div>}
             {/*filter button list*/}
 
-            <div className="filter-buttons" style={{marginLeft : needSearch ? "20px" : "0px"}}>
+            <div className="filter-buttons" style={{ marginLeft: needSearch ? "20px" : "0px" }}>
                 {
                     filter_options && filter_options.map((b, i) =>
-                        <button key={i} onClick={() => { filter_handler(b) }} >{b}</button>
+                        <button className={selectedFilter === b ? "search-filter-clicked" : ""} key={i}
+                            onClick={() => { filter_handler(b, selectedDate.start_date, selectedDate.end_date); setSelectedFilter(b); }} >{b}</button>
                     )
                 }
+                <div className="date-filter-container">
+                    <button className={selectedFilter === "by time" && "search-filter-clicked"}
+                        onClick={() => {
+                            setDateFilterOpened(p => !p);
+                            setSelectedFilter("by time");
+                        }}>By Time</button>
+                    <div className={`date-filter-drop ${dateFilterOpened ? "" : "close"}`}>
+                        <div>
+                            <input type="date" onChange={(e) => setSelectedDate(p => ({ ...p, start_date: e.target.value }))} />
+                        </div>
+                        <div>
+                            <input type="date" onChange={(e) => setSelectedDate(p => ({ ...p, end_date: e.target.value }))} />
+                        </div>
+
+                        {selectedDate && <button onClick={() => { filter_handler("by time", selectedDate.start_date, selectedDate.end_date); setDateFilterOpened(p => !p); }}>Search</button>}
+                    </div>
+                </div>
+
             </div>
         </div >
 
