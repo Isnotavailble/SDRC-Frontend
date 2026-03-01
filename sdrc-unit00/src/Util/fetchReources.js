@@ -38,7 +38,15 @@ export async function fetchAllResources({ setLoading, setrror, setResources }) {
 export async function addResource({ data, setResources }) {
 
     try {
-        console.log("fuckkk", data);
+        /*
+        backup clean up code if server not trim the string
+
+        const cleanedData = {
+            ...data,
+            resource_name : data.resource_name.trim(),
+            resource_type : data.resource_type.trim(),
+            contact_info : data.contact_info.trim(),
+        }*/
 
         const token = localStorage.getItem("user_token");
         const res = await axios.post("http://localhost:8080/api/v1/resources", data, {

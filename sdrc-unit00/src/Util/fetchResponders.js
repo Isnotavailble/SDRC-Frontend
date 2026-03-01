@@ -34,7 +34,7 @@ export async function getAllResponders({ setError, setLoading, setResponders }) 
             "phone": r.phone_number,
             "region": getRegions().find(region => region.region_id === r.region_id).region,
             "status": r.is_approved ? "Approved" : "Pending",
-            "registered_date" : r.created_at,
+            "registered_date": r.created_at,
             "time": timeAgo(r.created_at),
         }));
 
@@ -49,4 +49,28 @@ export async function getAllResponders({ setError, setLoading, setResponders }) 
         setLoading(null);
     }
 
+}
+//approve the responder
+export async function approveResponder({ responder_id, setLoading, setError }) {
+    try {
+        setLoading("approving responder");
+        const token = localStorage.getItem("user_token");
+        const res = await axios.patch(`http://localhost:8080/api/v1/users/${responder_id}/approve`, {}, {
+
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        console.log("responder approved", res.data);
+        setLoading(null);
+        setError(null);
+        return true;
+
+    }
+    catch (error) {
+        console.error("Error", error);
+        setLoading("Could not Approved the user");
+        return false
+    }
 }

@@ -12,7 +12,7 @@ import "./ResponderRequestCard.css";
 
 export default function ResponderRequestCard({ data_object, onApproved }) {
     const { id, status, name, region, phone, registered_date, time } = data_object;
-    const [isApproved, setApproved] = useState(status.toLowerCase() === "approved");
+    const isApproved = status.toLowerCase() === "approved";
 
     return (
         <div className="request-card-container">
@@ -21,9 +21,9 @@ export default function ResponderRequestCard({ data_object, onApproved }) {
                 color: isApproved ? "#21af09" : "#db6f00",
                 boxShadow: `0px 0px 5px ${isApproved ? "#21af09" : "#db6f00"}`
             }}>
-                {status}
+                {isApproved ? "Approved" : "Pending"}
             </div>
-            <p className="time-label" style={{right : "1px"}}>{time}</p>
+            <p className="time-label" style={{ right: "1px" }}>{time}</p>
 
             <p>responder's name</p>
             <h3>{name || "Unknown"}</h3>
@@ -44,7 +44,6 @@ export default function ResponderRequestCard({ data_object, onApproved }) {
                     <>
                         <button className="approve-btn" onClick={() => {
                             const s = onApproved(id);
-                            setApproved(s);
                         }}>Approve</button>
                     </>
                 )}

@@ -4,9 +4,8 @@ import "./AdminApprovalPage.css";
 import ResponderRequestCard from "../../Cards/ResponderRequestCard/ResponderRequestCard";
 import AnimateInView from "../../../Animations/AnimateInView";
 import { Loader } from "lucide-react";
-import { fetchAllDisaster } from "../../../Util/fetchDisaster";
 import { getAllResponders } from "../../../Util/fetchResponders";
-import { approveResponder } from "../../../Util/fetchApproveResponder";
+import { approveResponder } from "../../../Util/fetchResponders";
 import axios from "axios";
 import { getRegions } from "../../../Util/fetchPostalCode";
 import { timeAgo } from "../../../Util/timeUnitConverter";
@@ -19,7 +18,17 @@ export default function AdminApprovalPage() {
 
     const approveBtnHandler = (responder_id) => {
         const ok = approveResponder({ setError, setLoading, responder_id });
-        return ok ? "approved" : "pending";
+        if (ok) {
+            setResponders(previous_responders => previous_responders.map((r, i) => {
+                if (r.id === responder_id) {
+                    const updatedResponder = {
+                        ...r, status: "Approved"
+                    };
+                    return updatedResponder;
+                }
+                return r;
+            }));
+        }
     }
     const filter_handler = async (option) => {
         const o = option.toLowerCase();

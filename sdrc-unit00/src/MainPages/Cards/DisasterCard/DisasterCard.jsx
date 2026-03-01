@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 export default function DisasterCard({ viewHandler, data_object }) {
     const { type, severity, severityValue, happened_at, location, time } = data_object;
-    const [approved, setApproved] = useState(false);
     const color = () => {
         if (!severity) return "";
         if (severity.toLowerCase() === "low") return "#21af09";
@@ -13,11 +12,12 @@ export default function DisasterCard({ viewHandler, data_object }) {
     }
     useEffect(() => { console.log("data loaded ", data_object); }, []);
 
+
     return (
         <div className="disaster-card-container">
             {/* Placed first for absolute positioning, perfectly matching your CSS */}
             <div className="disaster-severity-badge" style={{ borderColor: color(), color: color(), boxShadow: "0px 0px 3px " + color() }}>
-                {approved ? "Approved" : "pending"}
+                {severity}
             </div>
             <div className="disaster-type-row">
                 {type.toLowerCase() === "earthquake" && <Activity className="disaster-icon" />}
@@ -33,7 +33,7 @@ export default function DisasterCard({ viewHandler, data_object }) {
             </div>
 
             <div className="disaster-card-buttons">
-                <button onClick={() => { setApproved(true); viewHandler && viewHandler(data_object); }}>view</button>
+                <button onClick={() => {viewHandler && viewHandler(data_object); }}>view</button>
             </div>
         </div>
     );

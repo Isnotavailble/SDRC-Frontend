@@ -76,7 +76,7 @@ export default function ResourceEditCard({ data_object, onCancle, openAddOption,
 
             <div className="edit-card-second-row">
                 <p>Resource Name</p>
-                <input value={inputData.resource_name} placeholder="Enter Resource name ..." type="text" onChange={(e) => { setInputData(p => ({ ...p, resource_name: e.target.value.trim() })) }} />
+                <input value={inputData.resource_name} placeholder="Enter Resource name ..." type="text" onChange={(e) => { setInputData(p => ({ ...p, resource_name: e.target.value })) }} />
             </div>
 
             <div className="edit-card-third-row">

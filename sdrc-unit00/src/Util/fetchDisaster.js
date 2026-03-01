@@ -2,7 +2,6 @@ import axios from "axios";
 
 export async function fetchAllDisaster() {
 
-
     try {
         const page_count = 10;
         const response_list_id = [];
