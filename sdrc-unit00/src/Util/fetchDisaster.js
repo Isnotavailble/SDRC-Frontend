@@ -21,7 +21,7 @@ response format
 export async function fetchAllDisaster(start_date, end_date) {
 
     try {
-        const { startDate, endDate } = getRecentDateRange(60)
+        const { startDate, endDate } = getRecentDateRange(60);
         //final checking 
         start_date = start_date || startDate;
         end_date = end_date || endDate;

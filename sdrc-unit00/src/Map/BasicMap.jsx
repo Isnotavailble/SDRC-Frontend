@@ -62,7 +62,7 @@ const SmartMarker = ({ p, centerPoint }) => {
 
     const handleMarkerClick = async () => {
         // If we already have the address, or it's currently loading, do nothing!
-        if (fetchedAddress || isFetching) return;
+        if (fetchedAddress || isFetching || !p.severityValue) return;
 
         setIsFetching(true);
         const name = await getOsmLocationName(p.latitude, p.longitude);
@@ -84,11 +84,11 @@ const SmartMarker = ({ p, centerPoint }) => {
                 }}>
                     {/* The OSM Address shows up here! */}
                     <b style={{ fontSize: "13px", color: "#444" }}>
-                        {isFetching ? "Fetching location..." : (fetchedAddress || p.location || "Click to load address")}
+                        {isFetching ? "Fetching location..." : (fetchedAddress || p.resource_name || "Click to load address")}
                     </b>
 
                     <p style={{ marginTop: "5px", marginBottom: "0px", fontSize: "12px", color: "#666" }}>
-                        Severity: {p.severityValue || `${p.latitude.toFixed(4)}, ${p.longitude.toFixed(4)}`}
+                        {p.severityValue ? `severity : ${p.severityValue}` : `location : ${p.latitude.toFixed(4)}, ${p.longitude.toFixed(4)}`}
                     </p>
                 </div>
             </Popup>

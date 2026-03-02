@@ -13,7 +13,7 @@ import { getRecentDateRange } from "../../../Util/timeUnitConverter";
 
 export default function MonitorDisasters() {
 
-    const filter_options = ["Default", "Low", "Medium", "High"];
+    const filter_options = ["Default", "Low", "Medium", "High", "by time"];
     const secondary_options = ["serverity", "location"]
     const [disasters, setDisasters] = useState(null);
     const leftSideBar = useRef({});
@@ -21,9 +21,9 @@ export default function MonitorDisasters() {
     //page count for infinit scroll
 
     useEffect(() => {
-        const {startDate,endDate} = getRecentDateRange(60);
+        const { startDate, endDate } = getRecentDateRange(60);
         const fetch_process = async () => {
-            const response = await fetchAllDisaster(startDate,endDate);
+            const response = await fetchAllDisaster(startDate, endDate);
             setDisasters(response);
             setSelectedEvent(response[0]);
         }
@@ -35,20 +35,23 @@ export default function MonitorDisasters() {
             setSelectedEvent(disasters[0]);
     }, [disasters])
 
-    const filterBtn_handler = async (option, start_date = null, end_date = null) => {
+    const filterBtn_handler = async (option, start_date = null, end_date = null, setSelectedDate) => {
         const o = option.toLowerCase();
         if (o === "default") {
+            const { startDate, endDate } = getRecentDateRange(60);
             const data = await fetchAllDisaster();
             setDisasters(data);
+            setSelectedDate(({ start_date: startDate, end_date: endDate }));
         }
         else if (o === "low" || o === 'medium' || o === "high") {
-            const data = await fetchAllDisaster(start_date,end_date);
+            const data = await fetchAllDisaster(start_date, end_date);
             console.log("b ", data);
             const filter_data = data.filter(d => d.severity.toLowerCase() === o);
             setDisasters(filter_data);
             console.log("filter", filter_data);
         }
         else if (o === "by time") {
+            
             const data = await fetchAllDisaster(start_date, end_date);
             console.log("filter by time", data);
             setDisasters(data);

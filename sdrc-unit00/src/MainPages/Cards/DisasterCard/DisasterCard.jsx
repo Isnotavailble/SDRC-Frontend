@@ -10,9 +10,6 @@ export default function DisasterCard({ viewHandler, data_object }) {
         if (severity.toLowerCase() === "high") return "#e62525";
         return "#db6f00";
     }
-    useEffect(() => { console.log("data loaded ", data_object); }, []);
-
-
     return (
         <div className="disaster-card-container">
             {/* Placed first for absolute positioning, perfectly matching your CSS */}
